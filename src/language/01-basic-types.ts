@@ -1,44 +1,55 @@
 /**
  * Classes will not be included here
- * Try to use functional approaches always!
- * Your code should not have `class` definitions, believe you don't need them
  *
- * DOM types will be omitted, targeting here mostly Node.js
+ * Try to use functional approaches always.
+ * Your code should not have `class` definitions, believe you don't need them.
  */
 
 /**
- * Any
+ * # Any
  *
- * "Temporary excuse"
- * disabled by compiler flag
+ * Could be disabled by compiler flag `--noImplicitAny`
  */
 const anyValue: any = {};
 /**
- * Unknown
+ * # Unknown
+ *
  * Better not to use it explicitly
- * Used in `catch` recently
+ *
+ * Recently was added as a type for an error is `catch`
  */
+
 const maybe: unknown = {};
-/** sample usage */
+
 const maybeSomething = {} as unknown;
+
+try {
+  throw 42;
+} catch (err: unknown) {}
+
 /**
- * Void,
- * aka `nothing`
+ * # Void
+ *
+ * Usually used to define that function do not return any value
  */
 function none(): void {}
 function log(line: string): void {
   console.log(line);
 }
+
 /**
- * Basic
+ * # String
  */
-const str: string = "1"; // '111', `111 ${variable}`
-const yes: boolean = true;
-const obj: Object = {};
-// Please do not use `Function` it is like `any` amongst functions
-const func: Function = () => 1;
+const str: string = "1"; // '111'
+const strTwo: string = `123`;
+
 /**
- * Symbol
+ * # Boolean
+ */
+const yes: boolean = true;
+
+/**
+ * # Symbol
  *
  * Always unique, in practice `enum` is more adopted
  */
@@ -47,41 +58,54 @@ let symbolYes1 = Symbol("yes");
 let symbolYes2 = Symbol("yes");
 // symbolYes1 === symbolYes2 // false
 /**
- * Numeric
+ * # Numeric
  */
 let num: number = 6;
+// Could have "_" separators to increase readability
 let readableNumber: number = 5_000_000_000;
+
+// Could be defined directly with oct/bin/hex literals
 let hex: number = 0xf00d;
 let binary: number = 0b1010;
 let octal: number = 0o744;
-// from ES2020
+
+// Available starting from `ES2020` (`tsconfig.json "target": "es2020"`)
 let big: bigint = 10000000000000000000000000000n;
 /**
- * Arrays
+ * # Arrays
+ *
+ * Could be defined by `[]` or `Array` generic
  */
 const array: any[] = ["a", "b"];
 const anotherArray: Array<number> = [1, 2];
+// 2 levels array definition
 const arrayComplex: string[][] = [
   ["a", "b"],
   ["c", "d"],
 ];
+// Arrays could mix different types. This is not very practical
 const mixedArray: (number | string | boolean)[] = [1, "2", true];
 const strangeArray: (number | number[])[] = [1, [1]];
 /**
- * Tuple
+ * # Tuple
+ *
+ * Do not confuse with `Array`
  */
 const sampleTuple: [string, number, boolean] = ["a", 1, true];
 /**
- * Enum
+ * # Enum
+ *
+ * Without explicit values provided. This will by default apply numbers sequence starting from `0` in transpiled javascript code
  */
-// Without values
 enum Status {
   OK,
   FAILURE,
 }
 const myStatus: Status = Status.OK;
 
-// With explicit values
+/**
+ * With explicit values
+ */
 enum Counter {
   ONE = "a",
   TWO = "b",
@@ -90,29 +114,46 @@ enum Counter {
 const myNumber: Counter = Counter.TWO;
 
 /**
- * Undefined, null
+ * # Undefined, null
+ *
+ * Undefined is usually used to define implicitly that nothing is there, it is empty, not defined
+ *
+ * Pure undefined
  */
-// Undefined is usually used for implicit `nothing there`
-// Pure undefined:
 let undef: undefined;
 const data1: undefined = [].find((x) => x > 0);
-// To represent `maybe` ?
+/**
+ * To represent "maybe" case, when value possibly is not set
+ */
 const data2: undefined | number = [1].find((x) => x > 0);
-// Usually used for explicit `not set` but better to use undefined
+/**
+ * Usually is used for explicit "not set" but better to use `undefined`
+ * */
 let _null: null = null;
 
 /**
- * never
+ * # Never
+ *
+ * Used in functions that will definitely not return
  */
-
 function explode(): never {
   throw new Error("bam");
 }
 
 /**
- * Object
+ * # Object
+ *
  * Everything else except number, string, boolean, symbol, null, or undefined
+ *
+ * Generally, you won’t need to use this.
+ *
+ * `Object` type is like `any` amongst objects
  */
-// Generally, you won’t need to use this
-// `Object` is `any` amongst objects
 const data3: Object = {};
+
+/**
+ * # Function
+ *
+ * Please do not use `Function` type explicitly, it is like `any` amongst functions
+ */
+const func: Function = () => 1;
