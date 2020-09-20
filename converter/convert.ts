@@ -1,5 +1,6 @@
 import fs from "fs";
 import { Glob } from "glob";
+import { dirname } from "path";
 import { ensureDir, writeFile } from "fs-extra";
 
 const source = `${process.cwd()}/src`;
@@ -125,6 +126,7 @@ async function main() {
     console.log("parsed", parsed);
     const md = transform(parsed);
     console.log("transform\n", md);
+    await ensureDir(dirname(destFileName));
     await writeFile(destFileName, md);
   }
 }
