@@ -6,7 +6,8 @@
   "author": "Oleg Makiienko",
   "license": "ISC",
   "scripts": {
-    "start": "tsc && node converter/convert.js"
+    "clean": "./scripts/clean.sh",
+    "markdown": "./scripts/markdown.sh"
   },
   "dependencies": {
     "@types/fs-extra": "^9.0.1",

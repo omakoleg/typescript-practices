@@ -1,7 +1,6 @@
 import fs from "fs";
-import path from "path";
 import { Glob } from "glob";
-import { ensureDir } from "fs-extra";
+import { ensureDir, writeFile } from "fs-extra";
 
 const source = `${process.cwd()}/src`;
 const destination = `${process.cwd()}/markdown`;
@@ -120,10 +119,13 @@ async function main() {
   for (const name of files) {
     console.log("fileName", name);
     const fileName = `${source}/${name}`;
+    const destFileName = `${destination}/${name}.md`;
     const sources = fs.readFileSync(fileName).toString();
     const parsed = parseFile(sources);
     console.log("parsed", parsed);
-    console.log("transform\n", transform(parsed));
+    const md = transform(parsed);
+    console.log("transform\n", md);
+    await writeFile(destFileName, md);
   }
 }
 main();
