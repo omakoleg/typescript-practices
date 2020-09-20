@@ -4,7 +4,7 @@ import { dirname } from "path";
 import { ensureDir, writeFile } from "fs-extra";
 
 const source = `${process.cwd()}/src`;
-const destination = `${process.cwd()}/markdown`;
+const destination = `${process.cwd()}/docs/pages`;
 
 console.log("source", source);
 

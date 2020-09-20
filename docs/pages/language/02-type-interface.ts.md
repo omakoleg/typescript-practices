@@ -1,14 +1,16 @@
-Type
+
+ Type
 
 ```ts
+
 type MyString = string;
 
 const myStringType: MyString = "a";
+
 ```
-
-mix types
-
+ mix types
 ```ts
+
 type MaybeString = string | undefined;
 
 type SomethingNobodyExpects = string | number | boolean;
@@ -26,9 +28,10 @@ type SomethingBigger = {
   a: number;
   b: number;
 };
+
 ```
 
-Recursive types
+ Recursive types
 
 ```ts
 type Tree = {
@@ -47,26 +50,22 @@ const tree: Tree = {
 };
 ```
 
-Combine definitions
+ Combine definitions
 
-Or case `|`
-
+ Or case `|` 
 ```ts
 class MyErrorClass {}
 type MyError = Error | MyErrorClass;
+
 ```
-
-And case `&`
-
+ And case `&` 
 ```ts
 type WithNumbers = {
   one: number;
   two: number;
 };
 ```
-
-all properties with same name will be `never`, do not do this !
-
+ all properties with same name will be `never`, do not do this !
 ```ts
 type WithStrings = {
   three: string;
@@ -76,12 +75,13 @@ type CombinedObject = WithNumbers & WithStrings;
 const combined: CombinedObject = {} as CombinedObject;
 combined.one;
 combined.three;
+
 ```
 
-Type vs Interface
+ Type vs Interface
 
-Type = for one liners, simple cases with `|` and `&`
-Interface = for complex constructs
+ Type = for one liners, simple cases with `|` and `&`
+ Interface = for complex constructs
 
 ```ts
 type GoodType = string | string[] | undefined;
@@ -92,7 +92,7 @@ interface GoodInterface {
 }
 ```
 
-Interface
+ Interface
 
 ```ts
 interface WithOptionalProps {
@@ -100,37 +100,29 @@ interface WithOptionalProps {
   maybeHere?: string;
 }
 ```
-
-with undefined shape
-
+ with undefined shape 
 ```ts
 interface JsonDecodedData {
   userId: string;
 ```
-
-// usually keys are `string` (number is also allowed, please don't)
-
+  // usually keys are `string` (number is also allowed, please don't)
 ```ts
   [anyNameHere: string]: any;
 }
 ```
-
-sample usage
-
+ sample usage 
 ```ts
 const body = `{"userId": "1", "age":21, "name":"Bob"}`;
 const apiRequest = JSON.parse(body) as JsonDecodedData;
 if (apiRequest.userId === "1") {
 ```
-
-// save to database
-
+  // save to database
 ```ts
 }
 
 ```
 
-Extends
+ Extends
 
 ```ts
 interface Base {
@@ -150,24 +142,21 @@ const myField: Field = {
   name: "My stuff",
 };
 ```
-
-just combine without additional properties
-
+ just combine without additional properties 
 ```ts
 interface NoNameField extends Base, Coordinate {}
 ```
-
-type NoNameField = Base & Coordinate;
-
+ type NoNameField = Base & Coordinate;
 ```ts
 const somebodyField: NoNameField = {
   length: 100,
   x: 10,
   y: 20,
 };
+
 ```
 
-readonly properties
+ readonly properties
 
 ```ts
 interface TryToAssign {
@@ -176,15 +165,13 @@ interface TryToAssign {
 }
 const readOnlyObject: TryToAssign = { b: "b" };
 ```
-
-This will not work:
-readOnlyObject.b = "10";
-
+ This will not work:
+ readOnlyObject.b = "10";
 ```ts
 readOnlyObject.a = 10;
 ```
 
-Function types
+ Function types
 
 ```ts
 type MyFunction = (a: string) => string;
@@ -195,34 +182,35 @@ const stringFunctionUgly: MyFunction = function (a: string) {
   return a.toLowerCase();
 };
 ```
-
-as interface
-Looks ugly, isn't it ?
-
+ as interface
+ Looks ugly, isn't it ?
 ```ts
 interface FunctionType {
   (a: string): string;
 }
 const stringInterfaceFunction: FunctionType = (a: string) => a.toLowerCase();
+
 ```
+  
+ interface Shape {
+   color: string;
+ }
+ interface Square extends Shape {
+   sideLength: number;
+ }
+ const square: Square = { color: "blue", sideLength: 10 };
 
-interface Shape {
-color: string;
-}
-interface Square extends Shape {
-sideLength: number;
-}
-const square: Square = { color: "blue", sideLength: 10 };
+ Extending interfaces
 
-Extending interfaces
 
-Hybrid Type.
-Could mix `function interface` and `properties interface`
-Skipped to not even show it.
+ Hybrid Type.
+ Could mix `function interface` and `properties interface`
+ Skipped to not even show it.
 
-Class Type
 
-Always try to do functional style :)
+ Class Type
+
+ Always try to do functional style :)
 
 ```ts
 
@@ -235,17 +223,14 @@ const buildDatabaseAdapter = (databaseName: string): DbAdapter => {
   const realDatabaseConnector = {} as any;
 
 ```
-
-// function is within scope = private
-
+  // function is within scope = private
 ```ts
-function get(id: string) {
-  return realDatabaseConnector.get(id);
-}
+  function get(id: string) {
+    return realDatabaseConnector.get(id);
+  }
+
 ```
-
-// function is within scope = private
-
+  // function is within scope = private
 ```ts
   function put(item: string) {
     return realDatabaseConnector.put(item);

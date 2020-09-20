@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-rm -Rf ./markdown
+rm -Rf ./docs/pages
 
 # Compiled converter
 rm -f converter/**/*.js

@@ -1,34 +1,35 @@
-Classes will not be included here
-Try to use functional approaches always!
-Your code should not have `class` definitions, believe you don't need them
 
-DOM types will be omitted, targeting here mostly Node.js
+ Classes will not be included here
+ Try to use functional approaches always!
+ Your code should not have `class` definitions, believe you don't need them
 
-Any
+ DOM types will be omitted, targeting here mostly Node.js
 
-"Temporary excuse"
-disabled by compiler flag
+
+ Any
+
+ "Temporary excuse"
+ disabled by compiler flag
 
 ```ts
+
 const anyValue: any = {};
 ```
 
-Unknown
-Better not to use it explicitly
-Used in `catch` recently
+ Unknown
+ Better not to use it explicitly
+ Used in `catch` recently
 
 ```ts
 const maybe: unknown = {};
 ```
-
-sample usage
-
+ sample usage 
 ```ts
 const maybeSomething = {} as unknown;
 ```
 
-Void,
-aka `nothing`
+ Void,
+ aka `nothing`
 
 ```ts
 function none(): void {}
@@ -37,33 +38,30 @@ function log(line: string): void {
 }
 ```
 
-Basic
+ Basic
 
 ```ts
 const str: string = "1"; // '111', `111 ${variable}`
 const yes: boolean = true;
 const obj: Object = {};
 ```
-
-Please do not use `Function` it is like `any` amongst functions
-
+ Please do not use `Function` it is like `any` amongst functions
 ```ts
 const func: Function = () => 1;
 ```
 
-Symbol
+ Symbol
 
-Always unique, in practice `enum` is more adopted
+ Always unique, in practice `enum` is more adopted
 
 ```ts
 let sym1 = Symbol("something");
 let symbolYes1 = Symbol("yes");
 let symbolYes2 = Symbol("yes");
 ```
+ symbolYes1 === symbolYes2 // false
 
-symbolYes1 === symbolYes2 // false
-
-Numeric
+ Numeric
 
 ```ts
 let num: number = 6;
@@ -72,14 +70,12 @@ let hex: number = 0xf00d;
 let binary: number = 0b1010;
 let octal: number = 0o744;
 ```
-
-from ES2020
-
+ from ES2020
 ```ts
 let big: bigint = 10000000000000000000000000000n;
 ```
 
-Arrays
+ Arrays
 
 ```ts
 const array: any[] = ["a", "b"];
@@ -92,26 +88,24 @@ const mixedArray: (number | string | boolean)[] = [1, "2", true];
 const strangeArray: (number | number[])[] = [1, [1]];
 ```
 
-Tuple
+ Tuple
 
 ```ts
 const sampleTuple: [string, number, boolean] = ["a", 1, true];
 ```
 
-Enum
+ Enum
 
-Without values
-
+ Without values
 ```ts
 enum Status {
   OK,
   FAILURE,
 }
 const myStatus: Status = Status.OK;
+
 ```
-
-With explicit values
-
+ With explicit values
 ```ts
 enum Counter {
   ONE = "a",
@@ -119,44 +113,43 @@ enum Counter {
   THREE = "c",
 }
 const myNumber: Counter = Counter.TWO;
+
 ```
 
-Undefined, null
+ Undefined, null
 
-Undefined is usually used for implicit `nothing there`
-Pure undefined:
-
+ Undefined is usually used for implicit `nothing there`
+ Pure undefined:
 ```ts
 let undef: undefined;
 const data1: undefined = [].find((x) => x > 0);
 ```
-
-To represent `maybe` ?
-
+ To represent `maybe` ?
 ```ts
 const data2: undefined | number = [1].find((x) => x > 0);
 ```
-
-Usually used for explicit `not set` but better to use undefined
-
+ Usually used for explicit `not set` but better to use undefined
 ```ts
 let _null: null = null;
+
 ```
 
-never
+ never
 
 ```ts
+
 function explode(): never {
   throw new Error("bam");
 }
+
 ```
 
-Object
-Everything else except number, string, boolean, symbol, null, or undefined
+ Object
+ Everything else except number, string, boolean, symbol, null, or undefined
 
-Generally, you won’t need to use this
-`Object` is `any` amongst objects
-
+ Generally, you won’t need to use this
+ `Object` is `any` amongst objects
 ```ts
 const data3: Object = {};
+
 ```

@@ -1,48 +1,42 @@
-Function definitions
 
-classical
+ Function definitions
 
+ classical 
 ```ts
 function withOptionalArgs(a: string, b?: number): void {}
 function withOptionalDefaultArgs(a: string, b = 10): void {}
 ```
-
-aka console.log
-
+ aka console.log
 ```ts
 function withPassThruArgs(...other: string[]): void {}
 ```
-
-function as parameter in function
-
+ function as parameter in function
 ```ts
 function convertToNumber(
   data: string,
   cb: (error: string | undefined, result?: number) => void
 ): void {}
+
 ```
-
-`const` notation
-
+ `const` notation 
 ```ts
 const withOptionalArgs2 = (a: string, b?: number): void => {};
 const withOptionalDefaultArgs2 = (a: string, b = 10): void => {};
 const withPassThruArgs2 = (a: string, ...other: string[]): void => {};
+
 ```
-
-explicit typings
-
+ explicit typings 
 ```ts
 type LoggerFunction = (...params: string[]) => void;
 const logFunction: LoggerFunction = (...params: string[]) => {
   console.log(...params);
 };
+
 ```
 
-Function parameters destructuring
+ Function parameters destructuring
 
-all in one
-
+ all in one 
 ```ts
 interface FunctionParams {
   a: string;
@@ -51,10 +45,9 @@ interface FunctionParams {
 const appInParams = ({ a }: FunctionParams): void => {
   console.log(a);
 };
+
 ```
-
-partial object
-
+ partial object 
 ```ts
 interface PartialFunctionObject {
   b: number;
@@ -62,10 +55,9 @@ interface PartialFunctionObject {
 const partialParams = (a: number, { b }: PartialFunctionObject): void => {
   console.log(a, b);
 };
+
 ```
-
-optionals
-
+ optionals 
 ```ts
 interface PartialFunctionOptionalObject {
   b: number;
@@ -73,9 +65,7 @@ interface PartialFunctionOptionalObject {
   d?: string;
 }
 ```
-
-Optional default is not necessary at last position !
-
+ Optional default is not necessary at last position !
 ```ts
 const partialParamsOptional = (
   a: number,
@@ -83,30 +73,27 @@ const partialParamsOptional = (
 ): void => {
   console.log(a, b, c, d); // d = string | undefined
 };
+
 ```
 
-Async functions
+ Async functions
 
-Async could be `run` at top level (remember: not in Lambda)
-
+ Async could be `run` at top level (remember: not in Lambda)
 ```ts
+
 async function main() {
   await Promise.resolve(1);
 }
 main();
 ```
-
-`async` function should contain `await` always !
-
+ `async` function should contain `await` always !
 ```ts
 const mainAsync = async (a: number): Promise<number> => {
   return await Promise.resolve(a);
 };
 ```
-
-Otherwise it is `Promise` function:
-You could still await it
-
+ Otherwise it is `Promise` function:
+ You could still await it
 ```ts
 const mainPromise = (): Promise<number> => {
   return Promise.resolve(1);
@@ -114,4 +101,5 @@ const mainPromise = (): Promise<number> => {
 async function runPromise() {
   await mainPromise(); // await Promise
 }
+
 ```
