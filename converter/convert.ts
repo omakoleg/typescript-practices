@@ -110,6 +110,15 @@ const getFiles = async (cwd: string): Promise<string[]> =>
     });
   });
 
+const generateIndexPage = async (files: string[]) => {
+  const indexFileName = `${destination}/index.md`;
+  await ensureDir(destination);
+  const content = ["# Pages\n"].concat(
+    files.map((x) => `- [${x.replace("-", " ")}](./${x})\n`)
+  );
+  await writeFile(indexFileName, content.join("\n"), "utf-8");
+};
+
 async function main() {
   console.log("destination", destination);
   await ensureDir(destination);
@@ -129,5 +138,6 @@ async function main() {
     await ensureDir(dirname(destFileName));
     await writeFile(destFileName, md);
   }
+  await generateIndexPage(files);
 }
 main();
