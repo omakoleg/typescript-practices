@@ -16,7 +16,7 @@ const anyValue: any = {};
  *
  * Better not to use it explicitly
  *
- * Recently was added as a type for an error is `catch`
+ * Recently was added as a type for an error in `catch`
  */
 
 const maybe: unknown = {};

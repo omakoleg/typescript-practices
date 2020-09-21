@@ -1,11 +1,11 @@
 # Pages
 
-- [language/01 basic-types.ts](./language/01-basic-types.ts)
+- [language/04 function.md](./language/04-function.md)
 
-- [language/02 type-interface.ts](./language/02-type-interface.ts)
+- [language/05 generics.md](./language/05-generics.md)
 
-- [language/03 destructuring.ts](./language/03-destructuring.ts)
+- [language/basic types.md](./language/basic-types.md)
 
-- [language/04 function.ts](./language/04-function.ts)
+- [language/destructuring and-spread.md](./language/destructuring-and-spread.md)
 
-- [language/05 generics.ts](./language/05-generics.ts)
+- [language/type interface.md](./language/type-interface.md)

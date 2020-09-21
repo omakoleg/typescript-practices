@@ -124,12 +124,13 @@ async function main() {
   await ensureDir(destination);
 
   const files = await getFiles(source);
-
+  const resultingFilenames = [];
   console.log(JSON.stringify(files, undefined, 4));
   for (const name of files) {
     console.log("fileName", name);
     const fileName = `${source}/${name}`;
-    const destFileName = `${destination}/${name}.md`;
+    const distFilename = name.split(".").slice(0, -1).join(".") + ".md";
+    const destFileName = `${destination}/${distFilename}`;
     const sources = fs.readFileSync(fileName).toString();
     const parsed = parseFile(sources);
     console.log("parsed", parsed);
@@ -137,7 +138,8 @@ async function main() {
     console.log("transform\n", md);
     await ensureDir(dirname(destFileName));
     await writeFile(destFileName, md);
+    resultingFilenames.push(distFilename);
   }
-  await generateIndexPage(files);
+  await generateIndexPage(resultingFilenames);
 }
 main();
