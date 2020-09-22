@@ -104,7 +104,7 @@ spreadTuple(...args);
  *
  * Array has more elements, so remaining will be ignored.
  *
- * ALso due to array length variable nature all function parameters should be optional and match type
+ * Also due to array variable nature all function parameters should be optional and match type
  */
 const args2 = [1, 2, 3, 4];
 function spreadAccept(a?: number, b?: number): void {}

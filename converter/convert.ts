@@ -1,5 +1,5 @@
 import fs from "fs";
-import { Glob } from "glob";
+import { Glob, IOptions } from "glob";
 import { dirname } from "path";
 import { ensureDir, writeFile } from "fs-extra";
 

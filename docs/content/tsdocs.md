@@ -30,3 +30,9 @@ How it looks like:
 Mode samples are in [typedoc](https://typedoc.org/guides/doccomments/#supported-tags) documentation pages
 
 You could also use playground to try it out <https://microsoft.github.io/tsdoc/>
+
+IntelliSense editor features are usually enabled when imported modules have tsdoc/jsdoc definitions
+
+> IntelliSense is a code-completion aid that includes a number of features: List Members, Parameter Info, Quick Info, and Complete Word. These features help you to learn more about the code you're using, keep track of the parameters you're typing, and add calls to properties and methods with only a few keystrokes.
+
+[IntelliSense in VSCode](https://docs.microsoft.com/en-us/visualstudio/ide/using-intellisense?view=vs-2019)

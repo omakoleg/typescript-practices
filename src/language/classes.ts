@@ -55,7 +55,7 @@ class ExtendedLogger extends BaseLogger {
 const extendedLogger = new ExtendedLogger("SampleLog");
 extendedLogger.getFullMassage("some message"); // => Extended: SampleLog: some message
 /**
- * Class members
+ * Class members definition
  */
 class PublicPrivate {
   // public by default

@@ -2,7 +2,7 @@
 
 - [Typescript](./content/typescript.md)
 
-- [Typical project structure / tools](./content/project.md) TODO
+- [Project structure and package tools](./content/project.md)
 
 - [Linting And Formatting](./content/lint-format.md) TODO
 

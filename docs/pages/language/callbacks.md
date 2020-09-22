@@ -93,5 +93,3 @@ fs.stat(fileToUpdate, (err: NodeJS.ErrnoException | null, stats: any) => {
   }
 });
 ```
-
-All this is hard to read and maintain
