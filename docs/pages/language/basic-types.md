@@ -1,8 +1,3 @@
-Classes will not be included here
-
-Try to use functional approaches always.
-Your code should not have `class` definitions, believe you don't need them.
-
 # Any
 
 Could be disabled by compiler flag `--noImplicitAny`
