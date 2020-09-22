@@ -28,6 +28,10 @@
 
 - [Promise](./pages/language/promise.md) TODO
 
+- [async/await](./pages/language/async-await.md) TODO
+
+- [Useful libraries](./content/useful-libraries.md) TODO
+
 - [jest](./content/jest.md) TODO
 
 - [AWS Lambda](./content/lambda.md) TODO

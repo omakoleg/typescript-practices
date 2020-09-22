@@ -1,5 +1,7 @@
 # Pages
 
+- [language/async await.md](./language/async-await.md)
+
 - [language/basic types.md](./language/basic-types.md)
 
 - [language/callbacks.md](./language/callbacks.md)
