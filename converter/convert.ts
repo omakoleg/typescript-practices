@@ -34,16 +34,16 @@ const parseFile = (sources: string): ResultBlock[] => {
     const startComment = trimmed.startsWith("/*");
     const endComment = trimmed.endsWith("*/");
     const oneLineComment = trimmed.startsWith("//");
-    console.log(
-      "=> ",
-      isCode,
-      trimmed,
-      startComment,
-      endComment,
-      oneLineComment,
-      commentBuffer,
-      codeBuffer
-    );
+    // console.log(
+    //   "=> ",
+    //   isCode,
+    //   trimmed,
+    //   startComment,
+    //   endComment,
+    //   oneLineComment,
+    //   commentBuffer,
+    //   codeBuffer
+    // );
 
     // single line comment
     if ((startComment && endComment) || oneLineComment) {
