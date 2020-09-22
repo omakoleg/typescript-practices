@@ -20,7 +20,7 @@
 
 - [Utility Types](./pages/language/utility-types.md) TODO
 
-- [Classes](./pages/language/classes.md) TODO
+- [Classes](./pages/language/classes.md)
 
 - [Modules](./pages/language/modules.md) TODO
 
