@@ -114,7 +114,7 @@ const generateIndexPage = async (files: string[]) => {
   const indexFileName = `${destination}/index.md`;
   await ensureDir(destination);
   const content = ["# Pages\n"].concat(
-    files.map((x) => `- [${x.replace("-", " ")}](./${x})\n`)
+    files.map((x) => `- [${x.replace(/-/g, " ")}](./${x})\n`)
   );
   await writeFile(indexFileName, content.join("\n"), "utf-8");
 };
