@@ -33,7 +33,7 @@ const parseFile = (sources: string): ResultBlock[] => {
     const trimmed = line.trim();
     const startComment = trimmed.startsWith("/*");
     const endComment = trimmed.endsWith("*/");
-    const oneLineComment = trimmed.startsWith("//");
+    const oneLineComment = line.startsWith("//"); // check without trimming !
     // console.log(
     //   "=> ",
     //   isCode,

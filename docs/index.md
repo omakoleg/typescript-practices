@@ -6,6 +6,8 @@
 
 - [Linting And Formatting](./content/lint-format.md) TODO
 
+- [Variables](./pages/language/variables.md)
+
 - [Basic types.md](./pages/language/basic-types.md)
 
 - [Destructuring and spread.md](./pages/language/destructuring-and-spread.md)
@@ -22,9 +24,9 @@
 
 - [Modules](./pages/language/modules.md) TODO
 
-- [TSDocs](./content/tsdocs.md) TODO
+- [TSDocs](./content/tsdocs.md)
 
-- [Callbacks](./pages/language/callbacks.md) TODO
+- [Callbacks](./pages/language/callbacks.md)
 
 - [Promise](./pages/language/promise.md) TODO
 
