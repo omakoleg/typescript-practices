@@ -183,9 +183,9 @@ interface DeepProperties {
     street: string;
   };
 }
-const userA = {} as DeepProperties;
-const userB = {} as DeepProperties;
-const resultingUserAB = {
+const userA: DeepProperties = {} as DeepProperties;
+const userB: DeepProperties = {} as DeepProperties;
+const resultingUserAB: DeepProperties = {
   ...userA,
   ...userB,
   address: {
