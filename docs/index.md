@@ -4,7 +4,7 @@
 
 - [Project structure and package tools](./content/project.md)
 
-- [Linting And Formatting](./content/lint-format.md) TODO
+- [Linting And Formatting](./content/lint-format.md)
 
 - [Variables](./pages/language/variables.md)
 
@@ -24,7 +24,7 @@
 
 - [Node.js lib](./content/nodejs-lib.md)
 
-- [Modules](./pages/language/modules.md) TODO
+- [Modules](./content/modules.md)
 
 - [TSDocs](./content/tsdocs.md)
 

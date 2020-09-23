@@ -14,8 +14,6 @@
 
 - [language/generics.md](./language/generics.md)
 
-- [language/modules.md](./language/modules.md)
-
 - [language/promise.md](./language/promise.md)
 
 - [language/type interface.md](./language/type-interface.md)
