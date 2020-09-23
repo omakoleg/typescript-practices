@@ -18,9 +18,11 @@
 
 - [Type & interface.md](./pages/language/type-interface.md)
 
-- [Utility Types](./pages/language/utility-types.md) TODO
+- [Utility Types](./pages/language/utility-types.md)
 
 - [Classes](./pages/language/classes.md)
+
+- [Node.js lib](./content/nodejs-lib.md)
 
 - [Modules](./pages/language/modules.md) TODO
 
@@ -28,11 +30,11 @@
 
 - [Callbacks](./pages/language/callbacks.md)
 
-- [Promise](./pages/language/promise.md) TODO
+- [Promise](./pages/language/promise.md)
 
 - [async/await](./pages/language/async-await.md) TODO
 
-- [Useful libraries](./content/useful-libraries.md) TODO
+- [Useful libraries](./content/useful-libraries.md)
 
 - [jest](./content/jest.md) TODO
 

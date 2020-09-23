@@ -69,6 +69,7 @@ fs.stat(fileToUpdate, (err: NodeJS.ErrnoException | null, stats: any) => {
           return console.error(`File reading error: ${errRead}`);
         } else {
           const newContents = `${contents}-updated`;
+          // throw new Error(`Nobody will handle me`)
           fs.writeFile(
             fileToUpdate,
             newContents,
@@ -85,3 +86,9 @@ fs.stat(fileToUpdate, (err: NodeJS.ErrnoException | null, stats: any) => {
     );
   }
 });
+/**
+ * When error happened inside of callback handler or thrown, there is no possibility to handle it in current scenario without
+ * additionally wrapping logic in try-catch.
+ *
+ * Currently unhandled errors will be just logged to stderr.
+ */
