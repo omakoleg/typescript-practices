@@ -35,6 +35,15 @@ const myArray = [];
 myArray.push(10); // ok
 ```
 
+Object key short notation
+
+```ts
+const userId = 10;
+const userObject = {
+  userId, // this mean: take `userId` as property name and assign value from `userId` variable
+};
+```
+
 # Block-scoping
 
 ```ts
