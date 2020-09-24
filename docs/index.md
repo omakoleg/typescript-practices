@@ -36,7 +36,7 @@
 
 - [Useful libraries](./content/useful-libraries.md)
 
-- [jest](./content/jest.md) TODO
+- [jest](./content/jest.md)
 
 - [AWS Lambda](./content/lambda.md) TODO
 
