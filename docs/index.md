@@ -32,7 +32,7 @@
 
 - [Promise](./pages/language/promise.md)
 
-- [async/await](./pages/language/async-await.md) TODO
+- [async/await](./pages/language/async-await.md)
 
 - [Useful libraries](./content/useful-libraries.md)
 
