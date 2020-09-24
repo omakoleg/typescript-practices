@@ -34,7 +34,7 @@ class BaseLogger {
   constructor(prefix: string) {
     this.name = prefix;
   }
-  getFullMassage(message: string) {
+  getFullMessage(message: string) {
     return `${this.name}: ${message}`;
   }
 }
@@ -43,14 +43,14 @@ class ExtendedLogger extends BaseLogger {
   constructor(name: string) {
     super(name); // call base class constructor
   }
-  getFullMassage(message: string) {
-    //call base version of `getFullMassage`
-    return `Extended: ${super.getFullMassage(message)}`;
+  getFullMessage(message: string) {
+    //call base version of `getFullMessage`
+    return `Extended: ${super.getFullMessage(message)}`;
   }
 }
 
 const extendedLogger = new ExtendedLogger("SampleLog");
-extendedLogger.getFullMassage("some message"); // => Extended: SampleLog: some message
+extendedLogger.getFullMessage("some message"); // => Extended: SampleLog: some message
 ```
 
 Class members definition
