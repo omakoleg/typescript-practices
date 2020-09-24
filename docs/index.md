@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## Typescript Practices
 
 - [Typescript](./content/typescript.md)
 
@@ -8,15 +8,15 @@
 
 - [Variables](./pages/language/variables.md)
 
-- [Basic types.md](./pages/language/basic-types.md)
+- [Basic types](./pages/language/basic-types.md)
 
-- [Destructuring and spread.md](./pages/language/destructuring-and-spread.md)
+- [Destructuring and spread](./pages/language/destructuring-and-spread.md)
 
-- [Function.md](./pages/language/function.md)
+- [Function](./pages/language/function.md)
 
-- [Generics.md](./pages/language/generics.md)
+- [Generics](./pages/language/generics.md)
 
-- [Type & interface.md](./pages/language/type-interface.md)
+- [Type & interface](./pages/language/type-interface.md)
 
 - [Utility Types](./pages/language/utility-types.md)
 
