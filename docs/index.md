@@ -6,21 +6,21 @@
 
 - [Linting And Formatting](./content/lint-format.md)
 
-- [Variables](./pages/language/variables.md)
+- [Variables](./pages/language/variables.md) \*
 
-- [Basic types](./pages/language/basic-types.md)
+- [Basic types](./pages/language/basic-types.md) \*
 
-- [Destructuring and spread](./pages/language/destructuring-and-spread.md)
+- [Destructuring and spread](./pages/language/destructuring-and-spread.md) \*
 
-- [Function](./pages/language/function.md)
+- [Function](./pages/language/function.md) \*
 
-- [Generics](./pages/language/generics.md)
+- [Generics](./pages/language/generics.md) \*
 
-- [Type & interface](./pages/language/type-interface.md)
+- [Type & interface](./pages/language/type-interface.md) \*
 
-- [Utility Types](./pages/language/utility-types.md)
+- [Utility Types](./pages/language/utility-types.md) \*
 
-- [Classes](./pages/language/classes.md)
+- [Classes](./pages/language/classes.md) \*
 
 - [Node.js lib](./content/nodejs-lib.md)
 
@@ -28,17 +28,17 @@
 
 - [TSDocs](./content/tsdocs.md)
 
-- [Callbacks](./pages/language/callbacks.md)
+- [Callbacks](./pages/language/callbacks.md) \*
 
-- [Promise](./pages/language/promise.md)
+- [Promise](./pages/language/promise.md) \*
 
-- [async/await](./pages/language/async-await.md)
+- [async/await](./pages/language/async-await.md) \*
 
 - [Useful libraries](./content/useful-libraries.md)
 
 - [jest](./content/jest.md)
 
-- [AWS Lambda](./content/lambda.md) TODO
+- [AWS Lambda](./content/lambda.md)
 
 Generated pages index:
 

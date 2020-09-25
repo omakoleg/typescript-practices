@@ -148,16 +148,18 @@ All external communications are wrapped into types which can be replaced
 later in tests
 
 > Sample of Lambda stream event handler which resolves parameters form `SSM`,
-> skips everything except 'INSERT'
+> skips any event except 'INSERT'
 > validates something in payload
 > and pushes data into another `DynamoDB` table
+
+Assumed here that `DynamoDBStreamEvent` will be triggered for one record
 
 `index.ts` Lambda event handler
 
 ```ts
 import { DynamoDBStreamEvent, DynamoDBStreamHandler } from "aws-lambda";
 import { DynamoDB, SSM } from "aws-sdk";
-import { initValidator } from "./validator";
+import { initValidator } from "./validator"; // definition skipped
 import { eventHandlerInternal } from "./lib";
 
 const region = "eu-west-1";
@@ -175,7 +177,12 @@ const config: EnvConfig = {
   ssmConfigKey: process.env.SSM_CONFIG_KEY!,
 };
 // Lambda handler
-export const eventHandler = eventHandlerInternal(docClient, ssm, config);
+export const eventHandler = eventHandlerInternal(
+  docClient,
+  ssm,
+  config,
+  validator
+);
 ```
 
 `lib.ts` With implementation
@@ -184,7 +191,8 @@ export const eventHandler = eventHandlerInternal(docClient, ssm, config);
 export const eventHandlerInternal = (
   docClient: DynamoDB.DocumentClient,
   ssm: SSM,
-  config: EnvConfig
+  config: EnvConfig,
+  validator: Validator
 ): DynamoDBStreamHandler => async (
   event: DynamoDBStreamEvent
 ): Promise<void> => {
@@ -194,24 +202,23 @@ export const eventHandlerInternal = (
     })
     .promise();
   const tableName = Parameter!.Value!;
-  for (const record of event.Records) {
-    if (record.eventName == "INSERT") {
-      // decode payload
-      const recordData = DynamoDB.Converter.unmarshall(
-        record.dynamodb!.NewImage!
-      );
-      const isValid = await validator.validate(recordData);
-      if (isValid) {
-        await docClient
-          .put({
-            TableName: tableName,
-            Item: recordData,
-          })
-          .promise();
-      }
-    } else {
-      console.log(`Skipped ${JSON.stringify(record)}`);
+  const record = event.Records[0];
+  if (record.eventName === "INSERT") {
+    // decode payload
+    const recordData = DynamoDB.Converter.unmarshall(
+      record.dynamodb!.NewImage!
+    );
+    const isValid = await validator.validate(recordData);
+    if (isValid) {
+      await docClient
+        .put({
+          TableName: tableName,
+          Item: recordData,
+        })
+        .promise();
     }
+  } else {
+    console.log(`Skipped ${JSON.stringify(record)}`);
   }
 };
 ```
@@ -223,10 +230,133 @@ Handler itself in of type `DynamoDBStreamHandler` which has one parameter: `even
 
 Now it is easy to write tests for `eventHandlerInternal` and mock any external client.
 
-## jest
+## Replacing aws-sdk in tests
 
-TODO
+In `jest` tests provided earlier code with `DynamoDB.DocumentClient` as parameter could be
+replaced by "fake" implementation.
 
-### fake aws-sdk
+This will reduce tests running time and don't have any side effects on data in shared tests database.
 
-TODO
+`mocked-dynamodb.ts` provides required function `put`. This "fake" function is capturing
+function cll parameters and provide already expected output.
+
+```ts
+import { DynamoDB } from "aws-sdk";
+
+interface Props {
+  putOutput?: DynamoDB.DocumentClient.PutItemOutput;
+  batchWriteOutput?: DynamoDB.DocumentClient.BatchWriteItemOutput;
+}
+
+interface MockedDynamoDb {
+  docClient: DynamoDB.DocumentClient;
+  putParams: DynamoDB.DocumentClient.PutItemInput[];
+  batchWriteParams: DynamoDB.DocumentClient.BatchWriteItemInput[];
+}
+
+export const mockedDynamoDb = ({
+  putOutput,
+  batchWriteOutput,
+}: Props): MockedDynamoDb => {
+  const putParams: DynamoDB.DocumentClient.PutItemInput[] = [];
+  const batchWriteParams: DynamoDB.DocumentClient.BatchWriteItemInput[] = [];
+  return {
+    docClient: ({
+      batchWrite: (params: DynamoDB.DocumentClient.BatchWriteItemInput) => {
+        batchWriteParams.push(params);
+        return {
+          promise: () => Promise.resolve(batchWriteOutput),
+        };
+      },
+      put: (params: DynamoDB.DocumentClient.PutItemInput) => {
+        putParams.push(params);
+        return {
+          promise: () => Promise.resolve(putOutput),
+        };
+      },
+    } as unknown) as DynamoDB.DocumentClient,
+    putParams,
+    batchWriteParams,
+  };
+};
+```
+
+Same can be done with `SSM`:
+
+`mocked-ssm.ts`:
+
+```ts
+import { SSM } from "aws-sdk";
+import { GetParameterRequest, GetParameterResult } from "aws-sdk/clients/ssm";
+
+interface Props {
+  getParameter?: GetParameterResult;
+}
+interface MockedSSM {
+  ssm: SSM;
+  getParameterParams: GetParameterRequest[];
+}
+
+export const mockedSsm = ({ getParameter }: Props): MockedSSM => {
+  const getParameterParams: GetParameterRequest[] = [];
+  return {
+    ssm: ({
+      getParameter: (p: GetParameterRequest) => {
+        getParameterParams.push(p);
+        return {
+          promise: () => Promise.resolve(getParameter),
+        };
+      },
+    } as unknown) as SSM,
+    getParameterParams,
+  };
+};
+```
+
+In tests later for `eventHandlerInternal`:
+
+```ts
+export const eventHandlerInternal = (
+  docClient: DynamoDB.DocumentClient,
+  ssm: SSM,
+  config: EnvConfig,
+  // validator: Validator
+): DynamoDBStreamHandler => async (
+  event: DynamoDBStreamEvent
+): Promise<void>
+
+describe("Lambda Test", () => {
+  it("success flow", async () => {
+    // mock database
+    const { docClient, putParams } = mockedDynamoDb({});
+    // mock parameter result
+    const { ssm, getParameterParams } = mockedSsm({
+      getParameter: {
+        Parameter: {
+          Value: "test",
+        },
+      },
+    });
+    await eventHandlerInternal(docClient, ssm, {
+      ssmConfigKey: "ssm-key",
+    })({
+      /* some database event*/
+    });
+    // called only once
+    expect(putParams).toHaveLength(1);
+    // what parameters?
+    expect(putParams).toEqual({
+      TableName: "test",
+      Item: {
+        /** database event data shape */
+      },
+    });
+    // called once
+    expect(getParameterParams).toHaveLength(1);
+    // what parameters?
+    expect(getParameterParams).toEqual({
+      Name: "ssm-key",
+    });
+  });
+});
+```
