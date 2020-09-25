@@ -13,7 +13,7 @@ Promise.resolve(1);
 Promise.reject(1);
 ```
 
-Every promise should eventually resolved or rejected
+Every promise should eventually be resolved or rejected
 
 ```ts
 new Promise<number>(
