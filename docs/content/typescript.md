@@ -10,13 +10,18 @@ TypeScript offers all of JavaScript’s features, and an additional layer on top
 
 Typescript code could be transpiled (also used as "compiled") into javascript to be run in browser or server-side.
 
-When transpiling into browser-compatible js it will include all polyfills requiring by targeted browsers.
+When transpiling into browser-compatible js it will include all polyfills required by targeted browsers.
 
-Server-side transpiled code could be executed in [`Node.js`](https://nodejs.org/en/) or [`Chakra`](https://github.com/microsoft/ChakraCore).
+Commonly used scenarios:
 
-Also `typescript` could be executed without transpiling into javascript using [`deno`](https://deno.land/) with extra layer of security.
+| Source Code | transpiled to javascript | Runtime                                           |
+| ----------- | ------------------------ | ------------------------------------------------- |
+| Typescript  | yes                      | Browser                                           |
+| Typescript  | yes                      | [Node.js](https://nodejs.org/en/)                 |
+| Typescript  | yes                      | [Chakra](https://github.com/microsoft/ChakraCore) |
+| Typescript  | no                       | [Deno](https://deno.land/)                        |
 
-## Install
+## Installation
 
 Typescript distributed as NPM package and could be installed by:
 
@@ -29,6 +34,8 @@ $ yarn tsc index.ts
 ```
 
 By default it will produce `index.js` file in same directory
+
+## Configuration
 
 Typescript `tsc` could be configured using cli arguments ot using `tsconfig.json`.
 
@@ -112,7 +119,7 @@ Some most commonly used:
 
 And many [others](https://www.typescriptlang.org/docs/handbook/compiler-options.html)
 
-# Using compiler directly
+# Using compiler programmatically
 
 This enables developers to use typescript compiler in non-standard way
 

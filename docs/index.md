@@ -1,6 +1,6 @@
 ## Typescript Practices
 
-- [Typescript](./content/typescript.md)
+- [Typescript Introduction](./content/typescript.md)
 
 - [Project structure and package tools](./content/project.md)
 
