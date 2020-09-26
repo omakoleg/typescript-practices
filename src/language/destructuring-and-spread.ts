@@ -5,7 +5,7 @@
  *
  * ## Tuples
  */
-const tuple: [string, number, boolean] = ["test", 1, false];
+const tuple: [string, number, boolean] = ["test", 1, true];
 /**
  * All elements
  */
@@ -83,7 +83,13 @@ interface ApplicationConfig {
   logger: Object;
   config: Object;
 }
-const { api } = {} as ApplicationConfig;
+const applicationConfigInstance = {
+  database: {},
+  api: {},
+  logger: {},
+  config: {},
+};
+const { api } = applicationConfigInstance;
 
 /**
  * # Spread operator
@@ -176,6 +182,7 @@ const resultingUserShape = {
  */
 interface DeepProperties {
   name: string;
+  names: string[];
   age: number;
   address: {
     country: string;
@@ -185,9 +192,13 @@ interface DeepProperties {
 }
 const userA: DeepProperties = {} as DeepProperties;
 const userB: DeepProperties = {} as DeepProperties;
+
 const resultingUserAB: DeepProperties = {
   ...userA,
   ...userB,
+  // merge arrays manually
+  names: [...userA.names, ...userB.names],
+  // merge "deep" objects manually
   address: {
     ...userA.address,
     ...userB.address,

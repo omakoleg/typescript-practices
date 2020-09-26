@@ -26,6 +26,7 @@ description: >- # this means to ignore newlines until "baseurl:"
 # url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: omakoleg
 github_username: omakoleg
+google_analytics: UA-179039536-1
 
 # Build settings
 theme: jekyll-theme-cayman

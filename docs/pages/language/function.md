@@ -13,7 +13,7 @@ Could be used spread operator to capture all parameters into an array
 function withPassThruArgs(...other: string[]): void {}
 ```
 
-Function could have another function as parameter
+Function can have another function as parameter
 
 ```ts
 function convertToNumber(
