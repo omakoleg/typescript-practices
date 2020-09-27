@@ -165,11 +165,37 @@ Fields there are not limited to some list and any tool can put configuration the
 }
 ```
 
+# Lock files
+
+```txt
+yarn.lock // for yarn
+package-lock.json // for npm
+```
+
+This files are fixing exact url to package, its dependencies and hash sums.
+
+File updated each time new package adder to the project.
+
+Files should be committed into git.
+
+When building your application on CI/CD, exact versions of dependencies will be
+installed based on this file using:
+
+```sh
+yarn install --frozen-lockfile
+```
+
 ## dependencies
 
 Described what packages are required for running application.
 
 Usually should not have testing utilities, types, dev tools
+
+To install only them, use `--production` argument:
+
+```sh
+yarn install --production
+```
 
 ## devDependencies
 

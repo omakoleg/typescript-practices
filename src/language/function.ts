@@ -1,5 +1,5 @@
 /**
- * # Function
+ * # Function definition
  *
  * Function parameters could be defined using required or optional notations
  */
@@ -9,7 +9,6 @@ function withOptionalDefaultArgs(a: string, b = 10): void {}
  * Could be used spread operator to capture all parameters into an array
  */
 function withPassThruArgs(...other: string[]): void {}
-
 /**
  * Function can have another function as parameter
  */
@@ -36,23 +35,14 @@ const errorFunction: LoggerFunction = (...params: string[]) => {
 };
 
 /**
- * To function parameters could be applied destructuring
+ * Could be applied destructuring to the function parameters
  */
 interface FunctionParams {
   a: string;
   b: number;
 }
-const appInParams = ({ a }: FunctionParams): void => {
-  console.log(a);
-};
-/**
- * Destructure only subset of parameters
- */
-interface PartialFunctionP {
-  b: number;
-}
-const partialParams = (a: number, { b }: PartialFunctionP): void => {
-  console.log(a, b);
+const appInParams = (first: number, { a }: FunctionParams): void => {
+  console.log(first, a);
 };
 
 /**
@@ -71,7 +61,6 @@ const partialParamsOptional = (
 ): void => {
   console.log(a, b, c, d); // d = string | undefined, c = string
 };
-
 /**
  * # Async functions
  *
@@ -140,12 +129,105 @@ partialFunction(200); // => 201
  * Call both same time. Pretty useless scenario
  */
 wrapperFunction("test")(200); // => 201
+/**
+ * # Short notation
+ *
+ * Can be used when function have only one operation which gives result and it could be immediately returned
+ */
+const shortNotation = (a: string) => (b: number) => (c: string) =>
+  `${a} -> ${b} -> ${c}`;
+/**
+ * Return an object as only one operation in function
+ */
+const addAndReturn = (a: string, b: string) => ({
+  sum: a + b,
+});
+/**
+ * Here, extra `()` is required because `{}` in function definition used to define function body.
+ */
 
 /**
- * Short notation
+ * # "this" capturing
  *
- * 3-level curried function definition sample
+ * Main difference between `function` and `const` function definitions is the way how they works with `this`
+ *
+ * In this sample `set` and `setClassical` doing the same thing, but are different
+ * because of definitions used
  */
-const shortHardReadableFunction = (a: string) => (justCode: number) => (
-  prefix: string
-) => `${prefix} for ${a} ${justCode}`;
+function practiceThisWrapper() {
+  // Curried function type
+  type Setter = (a: string) => (a: string) => void;
+  // Object type definition in needed for `this` usage inside of it's functions
+  interface CapturingObject {
+    data: Record<string, string>;
+    set: Setter;
+    setClassical: Setter;
+  }
+  const thisCapturingObject: CapturingObject = {
+    data: {},
+    set: function (key: string) {
+      // Next arrow function is capturing `this` as current scope
+      // classical `function` will not work when using `this` inside
+      return (value: string) => {
+        this.data[key] = value;
+      };
+    },
+    setClassical: function (key: string) {
+      // keep `this` for the `function`
+      const self = this;
+      return function (value: string) {
+        self.data[key] = value;
+      };
+    },
+    // It is wrong definition:
+    // `this` will be referencing scope of `thisPracticeWrapper`
+    // setShort: (key: string) => (value: string) => {
+    //   this.data[key] = value;
+    // },
+  };
+  thisCapturingObject.set("data")("value");
+  thisCapturingObject.setClassical("data2")("value2");
+  console.log(thisCapturingObject.data);
+  // { data: 'value', data2: 'value2' }
+}
+practiceThisWrapper();
+/**
+ * As a recommendation here is to use builder to create the object.
+ * This will not require to use `this` and will be more transparent
+ */
+function practiceThisBuilderWrapper() {
+  // Curried function type
+  type Setter = (a: string) => (a: string) => void;
+  // Object type definition in needed for `this` usage inside of it's functions
+  interface CapturingObject {
+    data: Record<string, string>;
+    set: Setter;
+    setClassical: Setter;
+  }
+  const buildCapturingObject = (): CapturingObject => {
+    const data: Record<string, string> = {};
+    // both are `arrow function` definitions
+    const set = (key: string) => {
+      return (value: string) => {
+        data[key] = value;
+      };
+    };
+    // both are `function` definitions
+    function setClassical(key: string) {
+      return function (value: string) {
+        data[key] = value;
+      };
+    }
+    return {
+      data,
+      set,
+      setClassical,
+    };
+  };
+  const thisCapturingObject = buildCapturingObject();
+  thisCapturingObject.set("data")("value");
+  thisCapturingObject.setClassical("data2")("value2");
+  console.log(thisCapturingObject.data);
+  // { data: 'value', data2: 'value2' }
+}
+practiceThisBuilderWrapper();

@@ -9,6 +9,12 @@ special solutions to solve these tasks.
 As an example it is rarely used `http` (`https`) to make API requests, but rather `axios`
 which provide more nice options and packed with additional functionality
 
+You could install all Node.js modules type definitions:
+
+```sh
+yarn add @types/node -D
+```
+
 Some popular modules:
 
 - `fs` module provides an API for interacting with the file system in a manner closely modeled around standard POSIX functions.
@@ -28,12 +34,14 @@ Some popular modules:
 And much more <https://nodejs.org/docs/latest-v13.x/api/>
 
 ```ts
-const fs = require("fs");
+import { unlinkSync } from "fs";
 
 try {
-  fs.unlinkSync("/tmp/hello");
+  unlinkSync("/tmp/hello");
   console.log("successfully deleted /tmp/hello");
 } catch (err) {
   // handle the error
 }
 ```
+
+Hint: `Cannot find module 'fs' or its corresponding type declarations.` error happening when no `@types/node` is installed
