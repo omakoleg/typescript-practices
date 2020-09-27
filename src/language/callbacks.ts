@@ -28,6 +28,7 @@ fs.readFile(
  *
  * Function doing division, and sometime exploding when someone will try to divide by `0`
  */
+// @playground-link
 const divide = (
   a: number,
   b: number,
@@ -42,12 +43,9 @@ const divide = (
     cb(e.toString());
   }
 };
-/**
- * It is used like this
- */
 const callback = (err?: Error, result?: number) => {
   if (err) {
-    console.log("error happened", err);
+    return console.log("error happened", err);
   }
   console.log("result", result);
 };

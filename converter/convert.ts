@@ -1,16 +1,19 @@
 import fs from "fs";
-import { Glob, IOptions } from "glob";
+import { Glob } from "glob";
 import { dirname } from "path";
 import { ensureDir, writeFile } from "fs-extra";
+import * as lz from "lz-string";
 
 const source = `${process.cwd()}/src`;
 const destination = `${process.cwd()}/docs/pages`;
 
 console.log("source", source);
 
+type CodeKind = "code" | "linked-code";
+
 interface ResultBlock {
   lines: string[];
-  type: "code" | "comment";
+  type: "comment" | CodeKind;
 }
 
 const parseFile = (sources: string): ResultBlock[] => {
@@ -20,17 +23,20 @@ const parseFile = (sources: string): ResultBlock[] => {
   let commentBuffer: string[] = [];
   let codeBuffer: string[] = [];
   let isCode = true;
+  let codeKind: CodeKind = "code";
   const dumpCode = () => {
     if (codeBuffer.length > 0 && codeBuffer.some((x) => x.trim() !== "")) {
       resultingBlocks.push({
-        type: "code",
+        type: codeKind,
         lines: codeBuffer,
       });
       codeBuffer = [];
+      codeKind = "code";
     }
   };
   for (const line of lines) {
     const trimmed = line.trim();
+    const turnOnCodeLink = trimmed.startsWith("// @playground-link");
     const startComment = trimmed.startsWith("/*");
     const endComment = trimmed.endsWith("*/");
     const oneLineComment = line.startsWith("//"); // check without trimming !
@@ -45,8 +51,11 @@ const parseFile = (sources: string): ResultBlock[] => {
     //   codeBuffer
     // );
 
+    if (turnOnCodeLink) {
+      codeKind = "linked-code";
+    }
     // single line comment
-    if ((startComment && endComment) || oneLineComment) {
+    else if ((startComment && endComment) || oneLineComment) {
       dumpCode();
       resultingBlocks.push({
         type: "comment",
@@ -79,11 +88,24 @@ const parseFile = (sources: string): ResultBlock[] => {
   return resultingBlocks;
 };
 
+const generateCodeLink = (code: string): string => {
+  const baseUrl = `https://www.typescriptlang.org/play?#code/`;
+  const linkUrl = baseUrl + lz.compressToEncodedURIComponent(code);
+  return `[open code in online editor](${linkUrl})\n`;
+};
+
 const transform = (parsed: ResultBlock[]): string => {
   let result: string[] = [];
   for (const part of parsed) {
     if (part.type === "code") {
-      result = result.concat("```ts", part.lines, "```");
+      result = result.concat(["```ts", ...part.lines, "```"]);
+    } else if (part.type === "linked-code") {
+      result = result.concat([
+        "```ts",
+        ...part.lines,
+        "```",
+        generateCodeLink(part.lines.join("\n")),
+      ]);
     } else {
       result = result.concat(
         part.lines.map(
