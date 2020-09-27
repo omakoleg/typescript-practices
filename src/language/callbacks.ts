@@ -54,6 +54,7 @@ divide(1, 0, callback); // prints: "error happened Error: Cant divide by 0"
 /**
  * When many callbacks are used it is easy to mess-up things and produce unreadable code
  */
+// @playground-link
 const fileToUpdate = "some-file";
 fs.stat(fileToUpdate, (err: NodeJS.ErrnoException | null, stats: any) => {
   if (err) {

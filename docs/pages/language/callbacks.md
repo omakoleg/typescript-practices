@@ -92,6 +92,8 @@ fs.stat(fileToUpdate, (err: NodeJS.ErrnoException | null, stats: any) => {
 });
 ```
 
+[open code in online editor](https://www.typescriptlang.org/play?#code/MYewdgzgLgBAZgSwDYFMAqICqAHAJgQyhRgF4YAiCEAWxQFpFVyBuAKDggDppCAKR9FjyEUAGhi8UAJykAuGADkQuFACkAypwCiMsCC0APYCmxQE4GAB8YYAK5Ik4nlAjz8YAJ4BKUgD4YAN6sMDAIcBLSUj5BISFSKFC2UmAwoJAgqJyRIFK8AAbqUIQQMNlyMAAkAZEAvnlebCE1pUgQxDGxaVSZSCAA5vkAYsjEzq6VAWN1DcGxHJzx+LjDqLyzsfAjGDgERKLrsZIyAEooS-JKKhrauvpGJmYW1nYO4mlEYC5unj4k-h0bEJhCInM64aIHQEweKJZKpcDdFBZGQ5IYjaFghBgPqlFHlKqRU5LaaNKEwZooVrtSGArqwMAoADuAGFwB8XKQYHkqu8UJ8IDU6LZhERcHlSWSYAB6KUwKAACykIEZNiZMB0StyeSUACNlB4YIzkEgYPL3LhUDBaPUaRt5oypAgiCsUGtJXatkJdmJbYCGSy2XyXPt3YdIgB1R1EC7KNSaDV6QzGUzmFLPexIX7-X1Q4FHKSRp0oCGhqEwpIpLoZJFlNGWh1OrE4sryAmg4n1CWlilUwI5slVnr9fKFoibMAICDylBimal2I1ftNftzsmLqHr2Krxc1BpAA)
+
 When error happened inside of callback handler or thrown, there is no possibility to handle it in current scenario without
 additionally wrapping logic in try-catch.
 
