@@ -47,7 +47,7 @@ const divide = (
 };
 const callback = (err?: Error, result?: number) => {
   if (err) {
-    console.log("error happened", err);
+    return console.log("error happened", err);
   }
   console.log("result", result);
 };
@@ -55,7 +55,7 @@ divide(1, 1, callback); // prints: "result 1"
 divide(1, 0, callback); // prints: "error happened Error: Cant divide by 0"
 ```
 
-[open code in online editor](https://www.typescriptlang.org/play?#code/MYewdgzgLgBAJgSwG4LgUxgXhgCgFAwwCGAXDGAK4C2ARmgE4A0BMNZltDzhwbuD9APxkAovXogmMemggUANlGHlqdegEosAPhhIQqPJsw6A3iyj0AnjDOFCCAGa4aWTNgAMm23cIyoFejAYXhwwNAB3GDEJehwAAwBhIjBYRBR0Vmt3OPV1AG4WQgBfQuCaHAowdAcEMLhGYhgAelZ85paoAAsECBge8hBYNAAPAAd5EEQwAHMGgCsKaGk0f0CYOIBJMBqwBChLOJgSdRYi4KIoYE7+L1KQtAA6KBAAZQta6ZxcguK8IoLQJBYMAiPJ5DQiMAANZYfjiZTRSQNGRyRTKDhqIymFiOOEaGx3cAQEDyR4TT4AIgEkhgnSIo1GaDqFIaAnypxYgOJpIe5JwFJRCigLOWqKg7P+eDSqDQOAAjA0FecwRDoW0mi1RvRalAIGQBbIhTA5RSpcgZfKGu4GiCVZCoerNdqUnqYFTxDS6QymWg4FEPfQyEkUvBzRkaFkKUA)
+[open code in online editor](https://www.typescriptlang.org/play?#code/MYewdgzgLgBAJgSwG4LgUxgXhgCgFAwwCGAXDGAK4C2ARmgE4A0BMNZltDzhwbuD9APxkAovXogmMemggUANlGHlqdegEosAPhhIQqPJsw6A3iyj0AnjDOFCCAGa4aWTNgAMm23cIyoFejAYXhwwNAB3GDEJehwAAwBhIjBYRBR0Vmt3OPV1AG4WQgBfQuCaHAowdAcEMLhGYhgAelZ85paoAAsECBge8hBYNAAPAAd5EEQwAHMGgCsKaGk0f0CYOIBJMBqwBChLOJgSdRYi4KIoYE7+L1KQtAA6KBAAZQta6ZxcguK8IoLQJBYMAiPJ5DQiMAANZYfjiZTRSQNGRyRTKDhqIymFiOOEaGylPwBIKAiAgeSPCafABEAkkME6RFGozQdWpDQE+VOLFJ5MpIBpKIUUHZy1RUC5-zwaVQaBwAEYGorzmCIdC2k0WqN6LUoBAyNShYoYPLqdLkLKFQ13A0QarIVCNVqdSl9TBaeJ6Yzmay0HAop76GQkil4BaMjQstSgA)
 
 When many callbacks are used it is easy to mess-up things and produce unreadable code
 
