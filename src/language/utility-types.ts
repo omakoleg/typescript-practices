@@ -7,40 +7,57 @@
  *
  * Allows to make all object properties "optional"
  */
-interface FullUser {
+// @playground-link
+interface FullType {
+  first: string;
+  last: string;
+}
+const fullData: FullType = {
+  first: "a",
+  last: "b",
+};
+const partialData: Partial<FullType> = {
+  last: "test",
+};
+console.log(partialData);
+/**
+ * Commonly used for partial data merge functions
+ */
+// @playground-link
+interface FullUserMerge {
   first: string;
   last: string;
   email: string;
   gender: string;
 }
-const fullUser: FullUser = {
+const fullUser: FullUserMerge = {
   first: "a",
   last: "b",
-  email: "email",
-  gender: "?",
-};
-const partialUser: Partial<FullUser> = {
   email: "test-email",
+  gender: "f",
 };
-/**
- * Commonly used for partial data merge functions
- */
 const mergeDataIntoUser = (
-  user: FullUser,
-  partialData: Partial<FullUser>
-): FullUser => ({
+  user: FullUserMerge,
+  partialData: Partial<FullUserMerge>
+): FullUserMerge => ({
   ...user,
   ...partialData,
 });
 
-mergeDataIntoUser(fullUser, { gender: "f" });
-mergeDataIntoUser(fullUser, { email: "some-email", last: "x" });
+const mergedData1 = mergeDataIntoUser(fullUser, { gender: "f" });
+const mergedData2 = mergeDataIntoUser(fullUser, {
+  email: "some-email",
+  last: "x",
+});
+console.log(mergedData1);
+console.log(mergedData2);
 
 /**
  * ## Required
  *
  * Opposite of `Partial`, makes all properties required
  */
+// @playground-link
 interface MaybeSomeOptions {
   db?: string;
   apiUrl?: string;
@@ -52,6 +69,7 @@ const allRequiredOptions: AllRequiredOptions = {
   apiUrl: "google.com", // required now
   api: "api-url", // required now
 };
+console.log(allRequiredOptions);
 
 /** ## Record
  *
@@ -78,6 +96,7 @@ const jsonData: Record<string, any> = JSON.parse(`{"nobody":"knows"}`);
 /**
  * Any type could be used to represent value
  */
+// @playground-link
 interface DynamoDbRecordType {
   userId: string;
   data: number;
@@ -92,12 +111,14 @@ const recordsByUserId: Record<string, DynamoDbRecordType> = {
     data: 200,
   },
 };
+console.log(recordsByUserId);
 
 /**
  * ## Readonly
  *
  * Set all properties of an object as `readonly`
  */
+// @playground-link
 interface DynamicInterface {
   a: string;
   b: number;
@@ -107,6 +128,7 @@ const readOnly: ReadonlyInterface = {
   a: "x",
   b: 1,
 };
+console.log(readOnly);
 /**
  * readOnly.a = "xx"; // Cannot assign to 'a' because it is a read-only property.
  */
@@ -117,6 +139,7 @@ const readOnly: ReadonlyInterface = {
  *
  * In practice not so often used.
  */
+// @playground-link
 interface FullBigType {
   one: number;
   two: number;
@@ -130,10 +153,12 @@ const oneOrTwo: OneAndTwo = {
   two: 2,
   // three  is not here
 };
+console.log(oneOrTwo);
 /** ## Omit
  *
  * Removes some properties from type definition
  */
+// @playground-link
 interface DatabaseUserSecret {
   userId: string;
   login: string;
@@ -153,9 +178,12 @@ const publicDbUser: DatabaseUserPublic = {
   // login: "username", // ...and 'login' does not exist in type
   // password: "secret", // ...and 'password' does not exist in type
 };
+console.log(privateDbUser);
+console.log(publicDbUser);
 /**
  * This type is useful for a cases when type of some properties should be changed
  */
+// @playground-link
 interface DynamodbItemPlain {
   recordId: string;
   createdAt: string;

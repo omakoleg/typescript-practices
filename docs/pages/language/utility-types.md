@@ -7,37 +7,55 @@ There are utility types provided by typescript which are useful for common use c
 Allows to make all object properties "optional"
 
 ```ts
-interface FullUser {
+interface FullType {
+  first: string;
+  last: string;
+}
+const fullData: FullType = {
+  first: "a",
+  last: "b",
+};
+const partialData: Partial<FullType> = {
+  last: "test",
+};
+console.log(partialData);
+```
+
+[open code in online editor](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgGIFcA2mAqBPABxQG8AoZZGYKAZzAC5k6pQBzAbnOUzjsebacAvqQQB7EHUpZMAEThg4jDNnxFkAXmRkKVWg2QAiOIYA0XHnyMAjM6SGdxksMgJwoYYHDkKlyAArunt4APCq4hBAAfJraFrwGhpB0dg6iEjRimBAAdJhirAAUbh5ePooAlOxAA)
+
+Commonly used for partial data merge functions
+
+```ts
+interface FullUserMerge {
   first: string;
   last: string;
   email: string;
   gender: string;
 }
-const fullUser: FullUser = {
+const fullUser: FullUserMerge = {
   first: "a",
   last: "b",
-  email: "email",
-  gender: "?",
-};
-const partialUser: Partial<FullUser> = {
   email: "test-email",
+  gender: "f",
 };
-```
-
-Commonly used for partial data merge functions
-
-```ts
 const mergeDataIntoUser = (
-  user: FullUser,
-  partialData: Partial<FullUser>
-): FullUser => ({
+  user: FullUserMerge,
+  partialData: Partial<FullUserMerge>
+): FullUserMerge => ({
   ...user,
   ...partialData,
 });
 
-mergeDataIntoUser(fullUser, { gender: "f" });
-mergeDataIntoUser(fullUser, { email: "some-email", last: "x" });
+const mergedData1 = mergeDataIntoUser(fullUser, { gender: "f" });
+const mergedData2 = mergeDataIntoUser(fullUser, {
+  email: "some-email",
+  last: "x",
+});
+console.log(mergedData1);
+console.log(mergedData2);
 ```
+
+[open code in online editor](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgGIFcA2mCqBnaAWWgHMUBvAKGWRmCjzAC5lGpQSBua5TORlmw7caEALZxgmQWHYguPMiAAm0GXIUBfSggD2IRrSy4CUFhmz4ipFAF5kVGnQbNkAIjhuANDz4D3AEbePOKS0u6QjAC0oVLBNEqqZu4wwZrcegZgyGI2ACJwYHAAkuC6VlDI9gAUPOim5sYVxFBkPjQADnBQYMBwmAVFLAAK3b39ADwWJtatEAB8lACUjZamLWRV88jVjsgAdIf10O0Hh109fQOFcD6aS9w6+oa5c8qDcACMVTn5N6VgcqmaowJqmLwOZCJNQpNzIe4ZZ7ZV5kd43ABMPxREA+AKB0BBYJODhCEikLDceF0uRiZMw8V4-FcbgAHmkHk8DLpMBB9phdCRqti0UVPhzMlSeXyBUKbCK4OiOUA)
 
 ## Required
 
@@ -55,7 +73,10 @@ const allRequiredOptions: AllRequiredOptions = {
   apiUrl: "google.com", // required now
   api: "api-url", // required now
 };
+console.log(allRequiredOptions);
 ```
+
+[open code in online editor](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgLJwJ4CMIGUD2AthAPIAOYw+IAzsgN4BQyyAJlgPwBcyNYUoAOYBuZsjhlgAVSgAbbr35DRLCcB58BIEcgD0u5GAAWwOqeQh8YZFAgBHAK7BbrADTJg1gO7BZsxZjiZjSMAL6MYBhkKACCfgBK9k4u5JTUdAC8yImOzhCsADzo2HhEpBRUtAB8ogjp1nAJSXmsqZU0PHGyOcn5benIWUws7DwAROwAtCBwxGPu+jbNLhb4XmJqMrLjgvj4grIQAHR1hPN6Bra5K5brqpLjapMOcueLV72sq+uhten4hyOsn2AApGt1ln0KukAJSiIA)
 
 ## Record
 
@@ -103,7 +124,10 @@ const recordsByUserId: Record<string, DynamoDbRecordType> = {
     data: 200,
   },
 };
+console.log(recordsByUserId);
 ```
+
+[open code in online editor](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgCIE8RwLYHtUBGAShArlACYAq6ADigN4BQyyArgM7QCSFAXMg5gooAOYBuFsgpwwcASDbYC0SQF8mZEEORRS5ChwBC6AKpcovASTKUAPEJEhRAGjSYc+Yvso16APmQAXmRmVgAiAEZwgTDWdgsrZCjwlylWGTkBSIAGHLTWNQLkgCYY0PSEnn5S1MrM+WQSvOKipjVJLQ5cABsIADoe3FEACj1bQxNzaoBKSSA)
 
 ## Readonly
 
@@ -119,7 +143,10 @@ const readOnly: ReadonlyInterface = {
   a: "x",
   b: 1,
 };
+console.log(readOnly);
 ```
+
+[open code in online editor](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgCIE8RwLbAQSXGniWQG8AoZZOALmQGcwpQBzAbiuQCN6QBXbN2icAvhTDoADigBKEOABMA9iAA26QpFiIUAXmTylqjQB4MWXASI6kAPk4JVTZFAWKA8uvT0jK71rEusgGlNR0yABEAB6RADRcvMgAjAmijs7KahAAdGrKrAAUbkpeGgCU7EA)
 
 readOnly.a = "xx"; // Cannot assign to 'a' because it is a read-only property.
 
@@ -143,7 +170,10 @@ const oneOrTwo: OneAndTwo = {
   two: 2,
   // three  is not here
 };
+console.log(oneOrTwo);
 ```
+
+[open code in online editor](https://www.typescriptlang.org/play?#code/FASwdgLgpgTgZgQwMZQAQDECuAbbAhEAcwBUBPABzQG9hVUB7MKALlTEwFsAjWAbltQQA7vVbtufARAAWMKCzaceMfnTj1MMMUslqQANwXjl-AL7AIFNAHkmAQTAATYiNQBeVAAUQSANYAeLFwCEisAGlQAIkYoSNQAHyjhekiAPn4kRgBnCAYmaxgXUVRbKAdnVw8aOhjWAEYwqRFWACZGugB6DsFZeToQLLZ6XOlYKGBTDOz6bCgAOmx6QgAKGIKigEpeIA)
 
 ## Omit
 
@@ -169,7 +199,11 @@ const publicDbUser: DatabaseUserPublic = {
   // login: "username", // ...and 'login' does not exist in type
   // password: "secret", // ...and 'password' does not exist in type
 };
+console.log(privateDbUser);
+console.log(publicDbUser);
 ```
+
+[open code in online editor](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgCJzHARnAzhAVXygGUIEoIxkBvAKGWQFdiBJAEwC5lcwpQA5gG4GyADYB7AaG69+IYaIAOeXAHcJULjz6CRjEHAC2EWboUiAvnTABPJSnSYc+ItAAKTLGOAJkAXmQAeSNgMAAeJ2w8QmIyCioAGmQAIklpEBTkAB9UlVx1TXYUgD4RBAkQXmQlfgA3DAhULDcobiiXWOh4ympA+kYWaA5uFIBGFMTRdJlUoahDE0nlVQ0tUfwEsGWDY1NUgFlbZAA5PeXLcsrqpS8fBGbW9oxo12JPb18A2lF5kdSJlNdiZRkdTucgcgAPRQ8RSWYpeaLCCTaGwgB0mLgIHYyAA5DMQHjkOwJBBcMgQBJqBAAB7AaqgZB2ByiGE1VZFDbkXqo9mY9HY3F4-KFLTE0nkynU5B0hnUJksiB0S50CpVCRiCDo9IAClqwAakEexAAlFcNVqdVJ9XdfCboOagA)
 
 This type is useful for a cases when type of some properties should be changed
 
@@ -201,6 +235,8 @@ const convert = (origin: DynamodbItemPlain): DynamodbItemParsed => ({
 const parsedDbData = convert(plainDbItem);
 console.log(parsedDbData); // this will have data as `DynamodbItemData`
 ```
+
+[open code in online editor](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgCIE8RwLYHsAmARgJKTYAKANnKMgN4BQyyUECuU+x+AXMgM5gooAOYBuJsgSs4kfAEEwfQcJDjJAVwAO+WRAVKBQ0ROa6wcZcbUSAvgwahIsRCgxY8RUhGypZcek1+aG4rVXVmDwgwkwZ7J2h4JDRMHAISMnI4KGD8ZAgAD0gQfH5kAHlsYDAAHnc0r0zqUAAaZAAiczh2gD5As38+es8Mnz8LOwZ2EEFkLWaQVFHsIdSR7woF5ABefpY2Di5eDtZ2TgBaYHx2lslpCD0DPnaAJgAGd-O3gEYv75vNDpHopnu9Ph8vi8AQMLHwAAZ0doaYJQbjtHhIlGXa5tdpRdHtACqKOQADkcBB2rY4bdbBJprNpgA3aBgHbIAAUHGAIlAqw86Q2VBoIAAlPyGsssjl9Ds+hzGMwAHQq7m8kC3GGWZAAKQAyuVSUqtNlglzhOqlV1RbTRfTcDM2SaZfgluMArtmayOfMRUsNnapg7+LhKBAlZRcCIfab9G7-HbkAB6JPIMAAC2AZQA7sBKJRkOm4CzkF1kHAynDhoKyO64QwgA)
 
 ## Other types
 
