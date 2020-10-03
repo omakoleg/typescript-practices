@@ -27,20 +27,25 @@
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
   integrity sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
 
-"@types/node@*", "@types/node@^14.11.1":
+"@types/node@*":
   version "14.11.1"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.11.1.tgz#56af902ad157e763f9ba63d671c39cda3193c835"
   integrity sha512-oTQgnd0hblfLsJ6BvJzzSL+Inogp3lq9fGgqRkMB/ziKMgEUaFl801OncOzUmalfzt14N0oPHMK47ipl+wbTIw==
+
+"@types/node@^14.11.2":
+  version "14.11.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.11.2.tgz#2de1ed6670439387da1c9f549a2ade2b0a799256"
+  integrity sha512-jiE3QIxJ8JLNcb1Ps6rDbysDhN4xa8DJJvuC9prr6w+1tIh+QAbYyNF3tyiZNLDBIuBCf4KEcV2UvQm/V60xfA==
 
 at-least-node@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/at-least-node/-/at-least-node-1.0.0.tgz#602cd4b46e844ad4effc92a8011a3c46e0238dc2"
   integrity sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg==
 
-aws-sdk@^2.759.0:
-  version "2.759.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.759.0.tgz#de4029dd6c804dd9e5570728e9206a103ddf9935"
-  integrity sha512-XTmt6b8NfluqmixO18Bu9ZttZMW9rwEDVO+XITsIQ5dZvLectwrjlbEn2refudJI1Y2pxLguw+tABvXi1wtbbQ==
+aws-sdk@^2.766.0:
+  version "2.766.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.766.0.tgz#f0b05d827c79c78d16efab0520f4ed0c21573665"
+  integrity sha512-msEEF7veBrxU1TlhLL33du4oJdwJ6uAWogf9+S0v437AX2z6K5IFr5J78JBysBudRHO0L6aC8bat6OS3oPEQvQ==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"

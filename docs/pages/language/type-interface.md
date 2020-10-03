@@ -208,33 +208,6 @@ readOnlyObject.a = 10;
 
 This will not work: `readOnlyObject.b = "10"`
 
-# Function types
-
-```ts
-type MyFunction = (a: string) => string;
-const stringFunction: MyFunction = (a: string) => a.toLowerCase();
-stringFunction("A"); // => a
-```
-
-Could be also used to assign full `function` definition
-
-```ts
-const anotherFunction: MyFunction = function (a: string) {
-  return a.toLowerCase();
-};
-```
-
-Function type can also be defined as `interface`
-
-This is not popular way, please don't do this
-
-```ts
-interface FunctionType {
-  (a: string): string;
-}
-const stringInterfaceFunction: FunctionType = (a: string) => a.toLowerCase();
-```
-
 # Use `interface` instead of `class`
 
 `class` definition can be replaced by function returning required object interface instance `DbAdapter`.

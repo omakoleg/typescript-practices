@@ -42,6 +42,17 @@ const errorFunction: LoggerFunction = (...params: string[]) => {
 };
 ```
 
+Function type can also be defined as `interface`
+
+This is not popular way, please don't do this, exists for backwards compatibility with javascript
+
+```ts
+interface FunctionType {
+  (a: string): string;
+}
+const stringInterfaceFunction: FunctionType = (a: string) => a.toLowerCase();
+```
+
 Could be applied destructuring to the function parameters
 
 ```ts
@@ -111,6 +122,11 @@ function add(a: number, b: number) {
   return a + b;
 }
 const addFunction = (a: number, b: number) => a + b;
+addFunction(1, 2);
+
+type MyFunction = (a: string) => string;
+const stringFunction: MyFunction = (a: string) => a.toLowerCase();
+stringFunction("A"); // => a
 ```
 
 Effectively it removes `{}` and `return`

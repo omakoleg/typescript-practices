@@ -1,7 +1,18 @@
-# Using callbacks
+# Callbacks
 
 Callbacks allowing to utilise so called "async nature" of `javascript` (and `typescript`) by detaching current
 execution and continue it later.
+
+Defined in a way that function except data parameters have also `callback` as last parameter.
+
+Callback is a function with 2 parameters:
+
+- `error` on a first place to reflect case when some issues happened, usually second parameter will not have value in this case
+- `data` useful function result, in this case `err` usually is set explicitly to `null` or `undefined`
+
+Return type of both mentioned functions is `void`. Because no-one is waiting for them to return value synchronous.
+
+Callback still can use `return` inside, but it is used to stop its execution and exit.
 
 ```ts
 import fs from "fs";
@@ -18,17 +29,7 @@ fs.readFile(
 
 In this example callback function will be executed "after" file descriptor is returned by OS and file contents were read out.
 
-Or some error happened. In this case `err` will have some value and `data` will be empty Buffer
-
-It is common pattern to have callback function with 2 arguments:
-
-- `error` on a first place when some issues happened, usually second parameter will not have value in this case
-- `data` useful function result, in this case `err` usually is `null` or `undefined`
-
-Callback functions usually have `void` as result type because no-one is waiting for them to return value,
-but rather perform some action later. Callback still have `return` inside but it is used to stop its execution.
-
-Function doing division, and sometime exploding when someone will try to divide by `0`
+Function doing division, and returning an error when someone will try to divide by `0`
 
 ```ts
 const divide = (
@@ -40,7 +41,7 @@ const divide = (
     if (b === 0) {
       return cb(new Error(`Cant divide by 0`));
     }
-    cb(undefined, a / b); // this is not exploding, just return `Infinity` :)
+    cb(undefined, a / b); // this returns `Infinity`
   } catch (e) {
     cb(e.toString());
   }
@@ -55,46 +56,42 @@ divide(1, 1, callback); // prints: "result 1"
 divide(1, 0, callback); // prints: "error happened Error: Cant divide by 0"
 ```
 
-[open code in online editor](https://www.typescriptlang.org/play?#code/MYewdgzgLgBAJgSwG4LgUxgXhgCgFAwwCGAXDGAK4C2ARmgE4A0BMNZltDzhwbuD9APxkAovXogmMemggUANlGHlqdegEosAPhhIQqPJsw6A3iyj0AnjDOFCCAGa4aWTNgAMm23cIyoFejAYXhwwNAB3GDEJehwAAwBhIjBYRBR0Vmt3OPV1AG4WQgBfQuCaHAowdAcEMLhGYhgAelZ85paoAAsECBge8hBYNAAPAAd5EEQwAHMGgCsKaGk0f0CYOIBJMBqwBChLOJgSdRYi4KIoYE7+L1KQtAA6KBAAZQta6ZxcguK8IoLQJBYMAiPJ5DQiMAANZYfjiZTRSQNGRyRTKDhqIymFiOOEaGylPwBIKAiAgeSPCafABEAkkME6RFGozQdWpDQE+VOLFJ5MpIBpKIUUHZy1RUC5-zwaVQaBwAEYGorzmCIdC2k0WqN6LUoBAyNShYoYPLqdLkLKFQ13A0QarIVCNVqdSl9TBaeJ6Yzmay0HAop76GQkil4BaMjQstSgA)
+[open code in online editor](https://www.typescriptlang.org/play?#code/MYewdgzgLgBAJgSwG4LgUxgXhgCgFAwwCGAXDGAK4C2ARmgE4A0BMNZltDzhwbuD9APxkAovXogmMemggUANlGHlqdegEosAPhhIQqPJsw6A3iyj0AnjDOFCCAGa4aWTNgAMm23cIyoFejAYXhwwNAB3GDEJehwAAwBhIjBYRBR0Vmt3OPV1AG4WQgBfQuCaHAowdAcEMLhGYhgAelZ85paoAAsECGk0f0DeuIBJMBqwBChLOJYi4KIoYE7+L1KQtAA6KBAAZQtagHMcXILivCKC0EhYYCJ5eRoiYABrLH5xZWjJBpk5RWUOGojKYWI53hobKU-AEglcICB5Jt5CAjgAiASSGCdIgABxxaDqqIaAnysxYcIRSJROFRvwUUCJfT+UFJFzwaVQaBwAEYGrz5vdHi82k0Wjj6LUoBAyLTZPSYNzUezkJyeQ13A1boKns8RWKJSlpTB0eJMdi8QS0HAoqb6GQkil4CqMjQsqigA)
 
-When many callbacks are used it is easy to mess-up things and produce unreadable code
+When many callbacks are used it is easy to mess-up things and produce complex code
 
 ```ts
-const fileToUpdate = "some-file";
-fs.stat(fileToUpdate, (err: NodeJS.ErrnoException | null, stats: any) => {
+import { stat, readFile, writeFile } from "fs";
+
+type Err = NodeJS.ErrnoException | null;
+const fileToUpdate = "/tmp/some-file.txt";
+
+stat(fileToUpdate, (err: Err, stats: any) => {
   if (err) {
     return console.error(`Stats error: ${err}`);
   } else {
     console.log(`File stats: ${stats}`);
-    fs.readFile(
-      fileToUpdate,
-      (errRead: NodeJS.ErrnoException | null, contents: any) => {
-        if (errRead) {
-          return console.error(`File reading error: ${errRead}`);
-        } else {
-          const newContents = `${contents}-updated`;
-          // throw new Error(`Nobody will handle me`)
-          fs.writeFile(
-            fileToUpdate,
-            newContents,
-            (errWrite: NodeJS.ErrnoException | null) => {
-              if (errWrite) {
-                return console.error(`File writing error: ${errRead}`);
-              } else {
-                console.log(`Write finished`);
-              }
-            }
-          );
-        }
+    readFile(fileToUpdate, (errRead: Err, contents: any) => {
+      if (errRead) {
+        return console.error(`File reading error: ${errRead}`);
+      } else {
+        const newContents = `${contents}-updated`;
+        // throw new Error(`Nobody will handle me`)
+        writeFile(fileToUpdate, newContents, (errWrite: Err) => {
+          if (errWrite) {
+            return console.error(`File writing error: ${errRead}`);
+          } else {
+            console.log(`Write finished`);
+          }
+        });
       }
-    );
+    });
   }
 });
 ```
 
-[open code in online editor](https://www.typescriptlang.org/play?#code/MYewdgzgLgBAZgSwDYFMAqICqAHAJgQyhRgF4YAiCEAWxQFpFVyBuAKDggDppCAKR9FjyEUAGhi8UAJykAuGADkQuFACkAypwCiMsCC0APYCmxQE4GAB8YYAK5Ik4nlAjz8YAJ4BKUgD4YAN6sMDAIcBLSUj5BISFSKFC2UmAwoJAgqJyRIFK8AAbqUIQQMNlyMAAkAZEAvnlebCE1pUgQxDGxaVSZSCAA5vkAYsjEzq6VAWN1DcGxHJzx+LjDqLyzsfAjGDgERKLrsZIyAEooS-JKKhrauvpGJmYW1nYO4mlEYC5unj4k-h0bEJhCInM64aIHQEweKJZKpcDdFBZGQ5IYjaFghBgPqlFHlKqRU5LaaNKEwZooVrtSGArqwMAoADuAGFwB8XKQYHkqu8UJ8IDU6LZhERcHlSWSYAB6KUwKAACykIEZNiZMB0StyeSUACNlB4YIzkEgYPL3LhUDBaPUaRt5oypAgiCsUGtJXatkJdmJbYCGSy2XyXPt3YdIgB1R1EC7KNSaDV6QzGUzmFLPexIX7-X1Q4FHKSRp0oCGhqEwpIpLoZJFlNGWh1OrE4sryAmg4n1CWlilUwI5slVnr9fKFoibMAICDylBimal2I1ftNftzsmLqHr2Krxc1BpAA)
+[open code in online editor](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAbzgZxgQxgGjlApmgEwDFgAbXbAdymBlxPLgF84AzKCEOAIleW4DcAKCEwAnmFxwAolChwAvHAByEArgBSAZQB0sqADsI0gB4BjXGBjAIBuAB84BgK6lSws7dRsyuACoQAKpgBBhSStwA9DDgkcicuAC0rL46MCYwgiKoGAAUKeQBwaF02Lm4cgBcMnLYOTDI1WgGYgCUigB8iEJwcMCscOVy7Qg9vTi4MM6GcJ4G8eQ6FRxQuQAGWugNcMvQ1QAkCMtMa63CvSy4pMhSo+OzXhCLpBAA5usMUvWNcIffJ2cxr08IRPvlfEUQmEyssAEr4AjVfTYOZ0AwNJotdoKLp3e59AZDKDwwgjIH4vBTGZzBa4JZyaAfXwTQjAAyvHYMqAHI5yEkEAHnfGXa63cn3GnwAy4SgAYVsaO2SjWh1RuHRyCYiWcULoBDWQvxcEikTgMAAFhxKE4ZTUVutVAAjNRiOCUMikODm5oERggXCncXjai0ei+cGFIK6ig2uUK9UNGFyADqNDoSOGnW6Rvu-UGy1TobJOYpk2mdhpTzpu1Wa0+brTbI5NZ5cIRgqD9xFN2zJfGleeb3WhboPgMwGQ5tw+sBfeYneYs+F5KYS6YQlXAiAA)
 
-When error happened inside of callback handler or thrown, there is no possibility to handle it in current scenario without
-additionally wrapping logic in try-catch.
+Maintaining such code is complex and easy to make mistakes
 
-Currently unhandled errors will be just logged to stderr.
+Currently unhandled errors will be just logged to stderr, if they are not given to callbacks.

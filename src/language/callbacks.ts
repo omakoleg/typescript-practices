@@ -1,8 +1,18 @@
 /**
- * # Using callbacks
+ * # Callbacks
  *
  * Callbacks allowing to utilise so called "async nature" of `javascript` (and `typescript`) by detaching current
  * execution and continue it later.
+ *
+ * Defined in a way that function except data parameters have also `callback` as last parameter.
+ *
+ * Callback is a function with 2 parameters:
+ * - `error` on a first place to reflect case when some issues happened, usually second parameter will not have value in this case
+ * - `data` useful function result, in this case `err` usually is set explicitly to `null` or `undefined`
+ *
+ * Return type of both mentioned functions is `void`. Because no-one is waiting for them to return value synchronous.
+ *
+ * Callback still can use `return` inside, but it is used to stop its execution and exit.
  */
 import fs from "fs";
 fs.readFile(
@@ -17,16 +27,7 @@ fs.readFile(
 /**
  * In this example callback function will be executed "after" file descriptor is returned by OS and file contents were read out.
  *
- * Or some error happened. In this case `err` will have some value and `data` will be empty Buffer
- *
- * It is common pattern to have callback function with 2 arguments:
- * - `error` on a first place when some issues happened, usually second parameter will not have value in this case
- * - `data` useful function result, in this case `err` usually is `null` or `undefined`
- *
- * Callback functions usually have `void` as result type because no-one is waiting for them to return value,
- * but rather perform some action later. Callback still have `return` inside but it is used to stop its execution.
- *
- * Function doing division, and sometime exploding when someone will try to divide by `0`
+ * Function doing division, and returning an error when someone will try to divide by `0`
  */
 // @playground-link
 const divide = (
@@ -38,7 +39,7 @@ const divide = (
     if (b === 0) {
       return cb(new Error(`Cant divide by 0`));
     }
-    cb(undefined, a / b); // this is not exploding, just return `Infinity` :)
+    cb(undefined, a / b); // this returns `Infinity`
   } catch (e) {
     cb(e.toString());
   }
@@ -52,42 +53,38 @@ const callback = (err?: Error, result?: number) => {
 divide(1, 1, callback); // prints: "result 1"
 divide(1, 0, callback); // prints: "error happened Error: Cant divide by 0"
 /**
- * When many callbacks are used it is easy to mess-up things and produce unreadable code
+ * When many callbacks are used it is easy to mess-up things and produce complex code
  */
 // @playground-link
-const fileToUpdate = "some-file";
-fs.stat(fileToUpdate, (err: NodeJS.ErrnoException | null, stats: any) => {
+import { stat, readFile, writeFile } from "fs";
+
+type Err = NodeJS.ErrnoException | null;
+const fileToUpdate = "/tmp/some-file.txt";
+
+stat(fileToUpdate, (err: Err, stats: any) => {
   if (err) {
     return console.error(`Stats error: ${err}`);
   } else {
     console.log(`File stats: ${stats}`);
-    fs.readFile(
-      fileToUpdate,
-      (errRead: NodeJS.ErrnoException | null, contents: any) => {
-        if (errRead) {
-          return console.error(`File reading error: ${errRead}`);
-        } else {
-          const newContents = `${contents}-updated`;
-          // throw new Error(`Nobody will handle me`)
-          fs.writeFile(
-            fileToUpdate,
-            newContents,
-            (errWrite: NodeJS.ErrnoException | null) => {
-              if (errWrite) {
-                return console.error(`File writing error: ${errRead}`);
-              } else {
-                console.log(`Write finished`);
-              }
-            }
-          );
-        }
+    readFile(fileToUpdate, (errRead: Err, contents: any) => {
+      if (errRead) {
+        return console.error(`File reading error: ${errRead}`);
+      } else {
+        const newContents = `${contents}-updated`;
+        // throw new Error(`Nobody will handle me`)
+        writeFile(fileToUpdate, newContents, (errWrite: Err) => {
+          if (errWrite) {
+            return console.error(`File writing error: ${errRead}`);
+          } else {
+            console.log(`Write finished`);
+          }
+        });
       }
-    );
+    });
   }
 });
 /**
- * When error happened inside of callback handler or thrown, there is no possibility to handle it in current scenario without
- * additionally wrapping logic in try-catch.
+ * Maintaining such code is complex and easy to make mistakes
  *
- * Currently unhandled errors will be just logged to stderr.
+ * Currently unhandled errors will be just logged to stderr, if they are not given to callbacks.
  */

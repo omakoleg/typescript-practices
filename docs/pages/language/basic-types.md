@@ -84,6 +84,12 @@ Available starting from `ES2020` (`tsconfig.json "target": "es2020"`)
 let big: bigint = 10000000000000000000000000000n;
 ```
 
+Sometimes you will need this when looking for a maximum number in an array
+
+```ts
+let maxNumber = Infinity;
+```
+
 # Arrays
 
 Could be defined by `[]` or `Array` generic
