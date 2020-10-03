@@ -34,11 +34,12 @@
 
 ### Practical Concepts
 
-|                                                   | Includes                                                           |
-| ------------------------------------------------- | ------------------------------------------------------------------ |
-| [Useful libraries](./content/useful-libraries.md) | walk thru some commonly used libraries                             |
-| [jest](./content/jest.md)                         | writing tests, configuration, mocks, expectations, `jest-dynamodb` |
-| [AWS Lambda](./content/lambda.md)                 | `@types/aws-lambda`, env, caching, DI, aws-sdk faking for tests    |
+|                                                        | Includes                                                           |
+| ------------------------------------------------------ | ------------------------------------------------------------------ |
+| [Class replacement](./pages/language/replace-class.md) | use builder function instead of `class` definition                 |
+| [Useful libraries](./content/useful-libraries.md)      | walk thru some commonly used libraries                             |
+| [jest](./content/jest.md)                              | writing tests, configuration, mocks, expectations, `jest-dynamodb` |
+| [AWS Lambda](./content/lambda.md)                      | `@types/aws-lambda`, env, caching, DI, aws-sdk faking for tests    |
 
 Generated pages index:
 
