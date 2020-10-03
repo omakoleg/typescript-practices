@@ -1,8 +1,8 @@
 ## Typescript Practices
 
-This is opinionated documentation giving introduction into `typescript` and more.
+This is opinionated documentation giving introduction into `typescript`language and beyond.
 
-Idea of this creation is to give fast onboarding and knowledge refresh for the most commonly used approaches and practices
+Idea of its creation is to give fast onboarding and knowledge refresh for the commonly used approaches and practices
 in day-to-day work.
 
 ### Typescript Introduction
