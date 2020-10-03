@@ -7,7 +7,7 @@
  *
  * Staring from `ECMAScript 2015` classes were introduced
  */
-
+// @playground-link
 type LogLevel = "error" | "debug";
 class Logger {
   level: LogLevel;
@@ -17,11 +17,12 @@ class Logger {
   }
 
   log(message: string) {
-    return `${this.level}: ${message}`;
+    console.log(`${this.level}: ${message}`);
   }
 }
 
 const logger = new Logger("debug");
+logger.log("Test message");
 
 /**
  * Try to use functional approaches always.
@@ -31,7 +32,7 @@ const logger = new Logger("debug");
 /**
  * Inheritance in classes
  */
-
+// @playground-link
 class BaseLogger {
   name: string;
   constructor(prefix: string) {
@@ -53,10 +54,11 @@ class ExtendedLogger extends BaseLogger {
 }
 
 const extendedLogger = new ExtendedLogger("SampleLog");
-extendedLogger.getFullMessage("some message"); // => Extended: SampleLog: some message
+console.log(extendedLogger.getFullMessage("some message")); // Extended: SampleLog: some message
 /**
  * Class members definition
  */
+// @playground-link
 class PublicPrivate {
   // public by default
   name0: string = "test";
@@ -74,7 +76,12 @@ class PublicPrivate {
   }
   private get() {}
   set() {}
+  i_am_using_all() {
+    this.#name;
+    this.name2 = `${this.name2}something`;
+  }
 }
+
 const publicPrivate = new PublicPrivate();
 publicPrivate.name0; // ok
 publicPrivate.name3; // ok

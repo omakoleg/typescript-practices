@@ -42,6 +42,7 @@ type SomethingBigger = {
  *
  * Could include itself in definitions
  */
+// @playground-link
 type Tree = {
   value: number;
   left?: Tree;
@@ -56,6 +57,7 @@ const tree: Tree = {
     },
   },
 };
+console.log(tree);
 /**
  * # Combining type definitions
  *
@@ -69,6 +71,7 @@ type MyError = Error | MyErrorClass;
 /**
  * And case `&` used to merge types into one
  */
+// @playground-link
 type WithNumbers = {
   one: number;
   two: number;
@@ -84,8 +87,8 @@ const combined: CombinedObject = {
   three: "3",
   four: "4",
 };
-combined.one;
-combined.three;
+console.log(combined.one);
+console.log(combined.three);
 /**
  * All properties with same name will have resulting type `never`. Do not do this !
  */
@@ -129,6 +132,7 @@ interface JsonDecodedData {
 const body = `{"userId": "1", "age":21, "name":"Bob"}`;
 const apiRequest = JSON.parse(body) as JsonDecodedData;
 if (apiRequest.userId !== undefined) {
+  console.log(apiRequest);
 }
 
 /**

@@ -67,7 +67,10 @@ const tree: Tree = {
     },
   },
 };
+console.log(tree);
 ```
+
+[open code in online editor](https://www.typescriptlang.org/play?#code/C4TwDgpgBAKgThaBeKBvAUFKA3AhgGwFcIAuKAO0IFsAjCOAbkynwgDNgB+M+RJrOAEsA5gAsuPBBCYBfJgGMA9uQDOwKMCmTEUFBix4ipKAEYADABpmrDmX1YcBYmQCsVh1CFjgd5h8POUADs7g4yoeHocuhKqoqsAHT4isIAFJqIAJQMQA)
 
 # Combining type definitions
 
@@ -98,9 +101,11 @@ const combined: CombinedObject = {
   three: "3",
   four: "4",
 };
-combined.one;
-combined.three;
+console.log(combined.one);
+console.log(combined.three);
 ```
+
+[open code in online editor](https://www.typescriptlang.org/play?#code/C4TwDgpgBA6glsAFgOQK4FsBGEBOBnKAXigG8AoKKAewDsIAuKGjbHAbgqmAHcrHmsuDgF8OoSLASIAysBxwaAcwLFylJDggMoeOQsUdKAMyqocjXfKUix4aAGEqWBRAAmAeUwArCAGNgRJJIaIL4UABkQTJ6SngcvrS6UAnOdK6Mjqlunj7+gWrUdIwAjAA0nDx8UABM5eqImtoARADMTXVQJmaMTQAs7WSiZAk0eFQANhAAdONUigAUKZgurlO0EACU8YkT07MLSytTGlpbQA)
 
 All properties with same name will have resulting type `never`. Do not do this !
 
@@ -149,6 +154,7 @@ Common use case is to parse json body and pass it to next service
 const body = `{"userId": "1", "age":21, "name":"Bob"}`;
 const apiRequest = JSON.parse(body) as JsonDecodedData;
 if (apiRequest.userId !== undefined) {
+  console.log(apiRequest);
 }
 ```
 

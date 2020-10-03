@@ -29,7 +29,7 @@ const buildDatabaseAdapter = (databaseName: string): DbAdapter => {
   // private
   const _getData = (id: string) => realDatabaseConnector.get(id);
 
-  // exposed via `return` = public
+  // exposed via return, it is public
   function get(id: string) {
     return _getData(id);
   }

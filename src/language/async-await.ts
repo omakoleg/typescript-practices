@@ -8,17 +8,16 @@
 const makeApiRequest = async (id: number): Promise<number> =>
   Promise.resolve(id);
 
-async function asyncExecution(): Promise<number> {
+async function asyncExecution(): Promise<any> {
   const first = await makeApiRequest(1);
   const second = await makeApiRequest(2);
   const third = await makeApiRequest(3);
-  return first + second + third;
+  console.log(first + second + third);
 }
-/**
- * In Node.js async functions called in main scope as "awaited" by runtime
- */
 asyncExecution();
 /**
+ * In Node.js async functions called in main scope and "awaited" by runtime
+ *
  * `await` could be used with `async` function, function returning `Promise` or literal.
  *
  * > Generally `await` for literals should not be used !
@@ -89,7 +88,6 @@ async function function2(): Promise<number> {
     throw e;
   }
 }
-
 function2();
 /**
  * Error will have a way thru all layers:
@@ -98,7 +96,6 @@ function2();
  *  - "Api error in function2"
  *  - "(node:88361) UnhandledPromiseRejectionWarning: 1000" ...
  */
-
 async function updatedFunction1(): Promise<number> {
   try {
     return makeApiRequestRejection();
@@ -109,7 +106,7 @@ async function updatedFunction1(): Promise<number> {
 }
 async function updatedFunction2(): Promise<number> {
   try {
-    return await function1();
+    return await updatedFunction1();
   } catch (e: unknown) {
     console.error(`Api error in function2`);
     throw e;
@@ -144,17 +141,18 @@ async function sequenceSample() {
   }
   return results;
 }
+sequenceSample();
 
 /**
  * ### Parallel await
  *
  * `Promise.all` could be used to achieve this.
  */
-const ids = [1, 2, 3, 5, 7, 34, 3, 645, 23, 345];
-const getItem = async (id: number) => Promise.resolve(id * 100);
+const ids1 = [1, 2, 3, 5, 7, 34, 3, 645, 23, 345];
+const getItem1 = async (id: number) => Promise.resolve(id * 100);
 
 async function parallelSample() {
-  const runningRequests: Promise<number>[] = ids.map((x) => getItem(x));
+  const runningRequests: Promise<number>[] = ids1.map((x) => getItem1(x));
   const results: number[] = await Promise.all(runningRequests);
   return results;
 }
@@ -162,7 +160,8 @@ parallelSample();
 /**
  * Remember: First rejection will throw an error in function without waiting for others to finish.
  */
-const getItemVerbose = async (id: number) =>
+const ids2 = [1, 2, 3, 5, 7, 34, 3, 645, 23, 345];
+const getItem2 = async (id: number) =>
   new Promise<number>((res, rej) => {
     setTimeout(() => {
       if (id === 3) {
@@ -175,9 +174,7 @@ const getItemVerbose = async (id: number) =>
   });
 
 async function parallelSampleVisualizeIssue() {
-  const results: number[] = await Promise.all(
-    ids.map((x) => getItemVerbose(x))
-  );
+  const results: number[] = await Promise.all(ids2.map((x) => getItem2(x)));
   console.log(results);
 }
 parallelSampleVisualizeIssue();
@@ -197,9 +194,23 @@ parallelSampleVisualizeIssue();
  *
  * For the cases when others should be still finished, use `Promise.allSettled`
  */
+const ids3 = [1, 2, 3, 5, 7, 34, 3, 645, 23, 345];
+
+const getItem3 = async (id: number) =>
+  new Promise<number>((res, rej) => {
+    setTimeout(() => {
+      if (id === 3) {
+        rej("Bam");
+      } else {
+        console.log(id);
+        res(id * 100);
+      }
+    }, id);
+  });
+
 async function waitAllToFinishIgnoringFailed() {
   const maybeResults: PromiseSettledResult<number>[] = await Promise.allSettled(
-    ids.map((x) => getItemVerbose(x))
+    ids3.map((x) => getItem3(x))
   );
   const results = maybeResults
     .filter((x) => x.status === "fulfilled")

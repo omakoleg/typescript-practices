@@ -39,6 +39,7 @@ const maybeAnotherOne: OptionalNumber = undefined;
  * # Interface Generic
  *
  */
+// @playground-link
 interface GenericTree<L> {
   value: L;
   left?: GenericTree<L>;
@@ -62,14 +63,19 @@ const numberTree: GenericTree<number> = {
     },
   },
 };
+console.log(stringTree);
+console.log(numberTree);
 
 /**
  * Using multiple type placeholders
  */
-type Converter<A, B> = (input: A) => B;
+type TwoPlaceholdersType<A, B> = (input: A) => B;
 /**
  * Make type aliasing
  */
+// @playground-link
+type Converter<A, B> = (input: A) => B;
+
 type ConvertToNumber = Converter<string, number>;
 type ConvertToString = Converter<number, string>;
 
@@ -77,8 +83,10 @@ const toNumberConverter: ConvertToNumber = (input: string): number =>
   parseInt(input);
 
 const toStringConverter: ConvertToString = (input: number): string =>
-  input.toString(input);
+  input.toString();
 
+console.log(toNumberConverter("100"));
+console.log(toStringConverter(200));
 /**
  * Generics based on type boundaries.
  *
@@ -90,6 +98,7 @@ const arrayMap = <A, B>(array: A[], func: (x: A) => B): B[] => array.map(func);
  *
  * `<T extends Sizable>` showing that `T` should be subtype of `Sizable`
  */
+// @playground-link
 interface Sizable {
   size: number;
 }
@@ -107,19 +116,20 @@ interface SizableHat {
 const sumAllSizes = <T extends Sizable>(array: T[]): number =>
   array.reduce((p: number, c: T) => c.size + p, 0);
 const hat: SizableHat = {
-  size: 10,
+  size: 5,
   radius: 1,
 };
 const cloth: SizableCloth = {
   size: 10,
   name: "cool",
 };
-sumAllSizes([hat, cloth]); // => 20
+const resultSum = sumAllSizes([hat, cloth]); // => 15
+console.log(resultSum);
 
 /**
  * Generic type definition based on another generic type
  *
- * Index Type Query or `keyof` It yields the type of permitted property names for a give type.
+ * Index Type Query or `keyof`: It yields the type of permitted property names for a give type.
  * `extends keyof` will result in having `K` as string with values as property names of `O`
  *
  * `O[K]` will be type of the value accessible in `O` when using `K` property

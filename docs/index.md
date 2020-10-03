@@ -1,5 +1,10 @@
 ## Typescript Practices
 
+This is opinionated documentation giving introduction into `typescript` and more.
+
+Idea of this creation is to give fast onboarding and knowledge refresh for the most commonly used approaches and practices
+in day-to-day work.
+
 ### Typescript Introduction
 
 |                                                             | Includes                                           |
@@ -29,8 +34,8 @@
 | --- | -------------------------------------------------- | ----------------------------------------- |
 | \*  | [Generics](./pages/language/generics.md)           | function, type, interface                 |
 | \*  | [Utility Types](./pages/language/utility-types.md) | Partial, Required, Record, Pick, Omit etc |
-|     | [Node.js lib](./content/nodejs-lib.md)             | Node.js modules and globals               |
-|     | [TSDocs](./content/tsdocs.md)                      | typescript documentation                  |
+|     | [Node.js](./content/nodejs-lib.md)                 | Node.js modules and globals               |
+|     | [TSDocs](./content/tsdocs.md)                      | source code documentation                 |
 
 ### Practical Concepts
 
@@ -41,8 +46,13 @@
 | [jest](./content/jest.md)                              | writing tests, configuration, mocks, expectations, `jest-dynamodb` |
 | [AWS Lambda](./content/lambda.md)                      | `@types/aws-lambda`, env, caching, DI, aws-sdk faking for tests    |
 
+### Notes
+
 Generated pages index:
 
 [Typescript Practices](./pages/index.md)
 
 `*` pages are fully generated from code, and could be examined in your favorite editor as one typescript file. Check them [here](https://github.com/omakoleg/typescript-practices/tree/master/src/language)
+
+Some code samples include code playground links (bottom right) to <https://www.typescriptlang.org/play> so you could
+test it without leaving browser

@@ -36,6 +36,7 @@ const userObject = {
 /**
  * # Block-scoping
  */
+// @playground-link
 function checkForError(isError: boolean) {
   let errorPrefix = "Error: ";
   if (isError) {
@@ -49,6 +50,7 @@ function checkForError(isError: boolean) {
 /**
  * `let` works within scope and could be shadowed within child scope
  */
+// @playground-link
 function checkForErrorAnother(isError: boolean) {
   const errorPrefix = "Error: ";
   if (isError) {
@@ -58,7 +60,7 @@ function checkForErrorAnother(isError: boolean) {
   }
   return errorPrefix + " not happened";
 }
-/**
- * `checkForErrorAnother(true)` will return "Internal Error: here"
- * `checkForErrorAnother(false)` will return "Error:  not happened"
- */
+const result1 = checkForErrorAnother(true); // "Internal Error: here"
+const result2 = checkForErrorAnother(false); // "Error:  not happened"
+console.log(result1);
+console.log(result2);

@@ -58,6 +58,8 @@ function checkForError(isError: boolean) {
 }
 ```
 
+[open code in online editor](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABBAFgUwgawGJwE4Ciee+AFDAM5El4BciARnHADZoCGYAlIgN4BQiRGyiI0xfAAU8aYDAAeiALyIARNXz1VAbkGIYwROSoS8PAUKEjEoFiw15lY09NkLEAajXoZOvUJkoEDwkW3tTXSEAXz0AeljEAAEoCgBaGABzMHw0PUDg0JA7B21EeMQHegByMIcqxAATODQKMCrRNHlKUR9cmKA)
+
 `let` works within scope and could be shadowed within child scope
 
 ```ts
@@ -70,7 +72,10 @@ function checkForErrorAnother(isError: boolean) {
   }
   return errorPrefix + " not happened";
 }
+const result1 = checkForErrorAnother(true); // "Internal Error: here"
+const result2 = checkForErrorAnother(false); // "Error:  not happened"
+console.log(result1);
+console.log(result2);
 ```
 
-`checkForErrorAnother(true)` will return "Internal Error: here"
-`checkForErrorAnother(false)` will return "Error: not happened"
+[open code in online editor](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABBAFgUwgawGJwE4Ciee+AgmHFOngBQwDORJeAXIgEZxwA2aAhmACUiAN4AoRMgT0oiNMXwAFPGmAwAHogC8iAERN8bXQG4JiGMER1GCvMPGTJEabPnNlqjdr0BJMFHkwPm5EA1Y9U0dEXllQbm4w7zclFTVNAGo9ajQTM0kVKBA8JDiE20jEAF8zAqKkZLwPNMRM3UQKWRQ+AAdutDA0ABNc6ucwGUQVehBuKABGb1QMHHww8kpqGig8EDRBY0QAekPff0Dg0Ns2bN0xMYmpmagAJkX0LFxCW3WqeRpgYL0PYHY56MJsdqURBdXr9Ia3e48NAAOm4cAA5jRHrM5vs7tIkaiMVi0NNZs88UA)

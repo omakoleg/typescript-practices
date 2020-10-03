@@ -67,17 +67,23 @@ const numberTree: GenericTree<number> = {
     },
   },
 };
+console.log(stringTree);
+console.log(numberTree);
 ```
+
+[open code in online editor](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgOIRNYCAqUIQA8AMgHzIDeAUMsgG5wA2ArhAFzLEDcNyjEMMAH4O6TFGx4CJUj1oSA5gAthojFlz4iZHgF8qCAPYgAzmGRmJIBVPZp1EzdMugF5ALyVeDFnYBESn4ANLz8ghzUtLQ+rBx+AEbBvPLAymARyVEx-ghJUci6IbSFVLo8RqbmIMwAtvHQtmriklqE1XXQHl7RTLHIAIwADEV8AundWb12AMwjKWkZ+T2+HAAccwUjJWUGxiaG-AB0jIYKABQu1rYAlOV7BxDHp2ft9VA3PEA)
 
 Using multiple type placeholders
 
 ```ts
-type Converter<A, B> = (input: A) => B;
+type TwoPlaceholdersType<A, B> = (input: A) => B;
 ```
 
 Make type aliasing
 
 ```ts
+type Converter<A, B> = (input: A) => B;
+
 type ConvertToNumber = Converter<string, number>;
 type ConvertToString = Converter<number, string>;
 
@@ -85,8 +91,13 @@ const toNumberConverter: ConvertToNumber = (input: string): number =>
   parseInt(input);
 
 const toStringConverter: ConvertToString = (input: number): string =>
-  input.toString(input);
+  input.toString();
+
+console.log(toNumberConverter("100"));
+console.log(toStringConverter(200));
 ```
+
+[open code in online editor](https://www.typescriptlang.org/play?#code/C4TwDgpgBAwg9gOwG4QE7DQHgIIBooBCAfFALxQAUAlgmAK7ABcU2AlGSQQNwBQPokWIhToAKnABydALYAjNGSHI0GVJgDOwVDQDm+BDPmoivAdHjKxcAMpbdiiyNWYDctPk3aEOk3wDGiJpQwJKGaI4qaMwRVlJuqIrUtAzMnrqszK5GHDxQUGAAhqjqEACSCMBJ9MCsvDwBCEEhtl46MarRwiriLfbkVSlQWWgZUGneOXk01QB0zXbeFLX+gXAANhAza3A6FCFxRu1oFABEAIwADBcnrMsN6uub27vzrUeoFABMV7dcQA)
 
 Generics based on type boundaries.
 
@@ -118,19 +129,22 @@ interface SizableHat {
 const sumAllSizes = <T extends Sizable>(array: T[]): number =>
   array.reduce((p: number, c: T) => c.size + p, 0);
 const hat: SizableHat = {
-  size: 10,
+  size: 5,
   radius: 1,
 };
 const cloth: SizableCloth = {
   size: 10,
   name: "cool",
 };
-sumAllSizes([hat, cloth]); // => 20
+const resultSum = sumAllSizes([hat, cloth]); // => 15
+console.log(resultSum);
 ```
+
+[open code in online editor](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgMrAF5wEYBsUDeAUMsgM6YQBcyIArgLbbQDcRAvkUaJLIiuix4IAYVwB7MAAtkxUiDgNq5MFFABzNqQoZl9Jqw5ce0eEjSYc+ABJwwsksihwAJsDpka+5lC3lKXow+bJxECOIgZPZkjACCuLiCEGTIALzIADwAKsgQAB6QIC4pglYQAHwAFHBQzgCeNFkA2gC6AJSBBlBp5Y419QB0UBAudEiVlQAOnT4ANMgIjW09CwM6KADUyJPzAAxtbOGR9lJ2NKXCtvbpcv66NACss47Obh40AIzP7IcRUQsSaTnSzCMSSGQ3RzrT67Z7yRTKABE4XEuER31+xycyTouDAqEYaXIcQSSTIlSapzA8wQgKk7RYyAA9EyVh8HmE-qiIAMJOpKsMYniCQwDkQgA)
 
 Generic type definition based on another generic type
 
-Index Type Query or `keyof` It yields the type of permitted property names for a give type.
+Index Type Query or `keyof`: It yields the type of permitted property names for a give type.
 `extends keyof` will result in having `K` as string with values as property names of `O`
 
 `O[K]` will be type of the value accessible in `O` when using `K` property
