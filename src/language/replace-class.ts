@@ -6,7 +6,7 @@
  *
  * > Always try to use functional style !
  *
- * Sample database adapter with few methods and property
+ * Sample database adapter with few methods and single property
  */
 interface DbAdapter {
   databaseName: string;

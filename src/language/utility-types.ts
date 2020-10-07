@@ -82,7 +82,7 @@ const fixedTypeInstance: FixedMap = {
   // c: 3,// ... and 'c' does not exist in type
 };
 /**
- * This 2 definitions are equal:
+ * These 2 definitions are equal:
  */
 type ObjectWithStringKeys = { [key: string]: any };
 type RecordWithStringKeys = Record<string, any>;
