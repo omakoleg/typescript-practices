@@ -56,3 +56,5 @@ Generated pages index:
 
 Some code samples include code playground links (bottom right) to <https://www.typescriptlang.org/play> so you could
 test it without leaving browser
+
+[Privacy Policy](./privacy.md)
