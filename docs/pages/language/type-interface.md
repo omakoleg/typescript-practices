@@ -111,13 +111,14 @@ All properties with same name will have resulting type `never`. Do not do this !
 
 # Type vs Interface
 
-Type generally is used for one liners, simple cases with `|` and `&`
+Type generally is used for one liners, simple cases with `|` and `&` or functions
 
 Interface is used for complex constructs
 
 ```ts
 type GoodType = string | string[] | undefined;
-interface GoodInterface {
+type GoodFunctionType = (a: string, b: string) => string;
+interface GoodDataInterface {
   customerId: number;
   age: number;
   email: string;

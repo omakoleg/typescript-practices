@@ -5,7 +5,7 @@ This is more popular approach compared to define new `class` and using `new`
 
 > Always try to use functional style !
 
-Sample database adapter with few methods and property
+Sample database adapter with few methods and single property
 
 ```ts
 interface DbAdapter {

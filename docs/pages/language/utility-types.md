@@ -91,7 +91,7 @@ const fixedTypeInstance: FixedMap = {
 };
 ```
 
-This 2 definitions are equal:
+These 2 definitions are equal:
 
 ```ts
 type ObjectWithStringKeys = { [key: string]: any };

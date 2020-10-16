@@ -6,6 +6,8 @@
 function withOptionalArgs(a: string, b?: number): void {}
 function withOptionalDefaultArgs(a: string, b = 10): void {}
 /**
+ * Optional parameters should be in the end of parameters definitions.
+ *
  * Could be used spread operator to capture all parameters into an array
  */
 function withPassThruArgs(...other: string[]): void {}
@@ -72,6 +74,22 @@ const partialParamsOptional = (
   console.log(a, b, c, d); // d = string | undefined, c = string
 };
 /**
+ * Provide default value when it is possible.
+ */
+const functionWithoutDefault = (name: string, data?: string[]) => {
+  if (data) {
+    // 'data' can be used now
+    data.map((x) => x);
+  }
+  // OR this way:
+  (data || []).map((x) => x);
+};
+
+const functionWithDefault = (name: string, data: string[] = []) => {
+  // 'data' can be used now
+};
+
+/**
  * # Async functions
  *
  * As a good practice is to use `await `inside of `async` function otherwise it is just a function returning `Promise`.
@@ -87,33 +105,14 @@ const mainPromise = (): Promise<number> => {
 /**
  * Using any of these
  */
-async function main() {
+async function myFunction() {
   await mainAsync(1); // async function
   await mainPromise(); // Promise function
 }
 /**
  * In Node.js you could call `async` function on top level and runtime will internally wait it to be resolved
  */
-main();
-
-/**
- * Short notation
- *
- * When function have only one line it could be changed to be in short notation
- */
-function add(a: number, b: number) {
-  return a + b;
-}
-const addFunction = (a: number, b: number) => a + b;
-addFunction(1, 2);
-
-type MyFunction = (a: string) => string;
-const stringFunction: MyFunction = (a: string) => a.toLowerCase();
-stringFunction("A"); // => a
-
-/**
- * Effectively it removes `{}` and `return`
- */
+myFunction();
 
 /**
  * # Curried functions
@@ -149,8 +148,12 @@ wrapperFunction("test")(200); // => 201
  * # Short notation
  *
  * Can be used when function have only one operation which gives result and it could be immediately returned
+ *
+ * > Effectively it removes `{}` and `return`
  */
-const shortNotation = (a: string) => (b: number) => (c: string) =>
+const shortNotation = (a: string, b: number) => `${a} + ${b}`;
+
+const shortCurried = (a: string) => (b: number) => (c: string) =>
   `${a} -> ${b} -> ${c}`;
 /**
  * Return an object as only one operation in function
@@ -160,6 +163,18 @@ const addAndReturn = (a: string, b: string) => ({
 });
 /**
  * Here, extra `()` is required because `{}` in function definition used to define function body.
+ *
+ * Here are same function definitions: add1, add2
+ */
+function add1(a: number, b: number) {
+  return a + b;
+}
+const add2 = (a: number, b: number) => a + b;
+add1(1, 2);
+add2(1, 2);
+
+/**
+ *
  */
 
 /**
