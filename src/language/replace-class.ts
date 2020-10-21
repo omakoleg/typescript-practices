@@ -18,8 +18,6 @@ interface DbAdapter {
  * Both functions `get` and `put` are exposed by interface definition as public.
  *
  * Within function you could define any other scoped functions, they will remain private.
- *
- * This approach also useful because `this` is not used and all problems related to it disappear.
  */
 const buildDatabaseAdapter = (databaseName: string): DbAdapter => {
   const realDatabaseConnector = {} as any;
@@ -43,3 +41,10 @@ const buildDatabaseAdapter = (databaseName: string): DbAdapter => {
   };
 };
 const myDbAdapter: DbAdapter = buildDatabaseAdapter("sample");
+
+/**
+ * Notable advantages:
+ * - No need to use `new` to initialize instance of the class, just function call
+ * - No need in constructor and reassigning parameters to class fields
+ * - `this` usage issues disappear, all functions have access to scope variables
+ */
