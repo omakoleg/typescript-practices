@@ -45,3 +45,14 @@ try {
 ```
 
 Hint: `Cannot find module 'fs' or its corresponding type declarations.` error happening when no `@types/node` is installed
+
+## fs
+
+Recommended filesystem access pattern:
+
+```ts
+import { promises: fs } from "fs";
+const contents = await fs.readFile(name);
+```
+
+No need to use `callback` or manual `Promise` wrapping

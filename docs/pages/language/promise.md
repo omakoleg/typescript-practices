@@ -145,6 +145,8 @@ const promisedReadFile = (name: string) =>
 promisedReadFile("test.txt").then(console.log);
 ```
 
+`fs.promises` recommended to use when `Promise` based functions are needed.
+
 ## Promise.all
 
 Returns a single Promise that resolves to an array of the results of the input promises
