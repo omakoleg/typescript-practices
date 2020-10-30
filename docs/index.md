@@ -36,6 +36,7 @@ in day-to-day work.
 | [Utility Types](./pages/language/utility-types.md)\* | Partial, Required, Record, Pick, Omit etc |
 | [Node.js](./content/nodejs-lib.md)                   | Node.js modules and globals               |
 | [TSDocs](./content/tsdocs.md)                        | source code documentation                 |
+| [Async arrays](./pages/topics/array-async.md) \*     | async functions is `map`, `reduce`, etc   |
 
 ### Practical Concepts
 

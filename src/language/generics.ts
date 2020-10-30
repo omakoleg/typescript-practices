@@ -1,6 +1,6 @@
 /**
  *
- * # Cenerics
+ * # Generics
  *
  * Usual use cases:
  * - when actual type is not important

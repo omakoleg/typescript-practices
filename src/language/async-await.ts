@@ -3,7 +3,9 @@
  *
  * The next iteration on async processing improvement.
  *
- * Functions are defined as `async` and executed with `await`
+ * Functions are defined as `async` and executed with `await`.
+ *
+ * When `Promise` is awaited, resolver value will be returned and rejected thrown.
  */
 const makeApiRequest = async (id: number): Promise<number> =>
   Promise.resolve(id);
@@ -126,109 +128,9 @@ updatedFunction2();
  */
 
 /**
- * ### Sequential await
- */
-async function sequenceSample() {
-  const getItem = async (id: number) => Promise.resolve(id * 100);
-
-  const ids = [1, 2, 3, 5, 7, 34, 3, 645, 23, 345];
-  const results = [];
-
-  for (const id of ids) {
-    // execute requests one by one
-    const result = await getItem(id);
-    results.push(result);
-  }
-  return results;
-}
-sequenceSample();
-
-/**
- * ### Parallel await
+ * # Key takeaways
  *
- * `Promise.all` could be used to achieve this.
- */
-const ids1 = [1, 2, 3, 5, 7, 34, 3, 645, 23, 345];
-const getItem1 = async (id: number) => Promise.resolve(id * 100);
-
-async function parallelSample() {
-  const runningRequests: Promise<number>[] = ids1.map((x) => getItem1(x));
-  const results: number[] = await Promise.all(runningRequests);
-  return results;
-}
-parallelSample();
-/**
- * Remember: First rejection will throw an error in function without waiting for others to finish.
- */
-const ids2 = [1, 2, 3, 5, 7, 34, 3, 645, 23, 345];
-const getItem2 = async (id: number) =>
-  new Promise<number>((res, rej) => {
-    setTimeout(() => {
-      if (id === 3) {
-        rej("Bam");
-      } else {
-        console.log(id);
-        res(id * 100);
-      }
-    }, id);
-  });
-
-async function parallelSampleVisualizeIssue() {
-  const results: number[] = await Promise.all(ids2.map((x) => getItem2(x)));
-  console.log(results);
-}
-parallelSampleVisualizeIssue();
-/**
- * This will print:
- * ```
- * 1
- * 2
- * (node:91215) UnhandledPromiseRejectionWarning: Bam
- * 5
- * ...
- * 645
- * ```
- *
- * This behavior usually is what is expected: Fails as soon as any request fails.
- * Outside function maybe will retry all again
- *
- * For the cases when others should be still finished, use `Promise.allSettled`
- */
-const ids3 = [1, 2, 3, 5, 7, 34, 3, 645, 23, 345];
-
-const getItem3 = async (id: number) =>
-  new Promise<number>((res, rej) => {
-    setTimeout(() => {
-      if (id === 3) {
-        rej("Bam");
-      } else {
-        console.log(id);
-        res(id * 100);
-      }
-    }, id);
-  });
-
-async function waitAllToFinishIgnoringFailed() {
-  const maybeResults: PromiseSettledResult<number>[] = await Promise.allSettled(
-    ids3.map((x) => getItem3(x))
-  );
-  const results = maybeResults
-    .filter((x) => x.status === "fulfilled")
-    .map((x) => (x as PromiseFulfilledResult<number>).value);
-  console.log(results);
-}
-waitAllToFinishIgnoringFailed();
-/**
- * ```txt
- * 1
- * 2
- * ...
- * 645
- * [
- *    1500,  100,   200,
- *     500,  700,  3400,
- *   64500, 2300, 34500
- * ]
- *
- * There is no `3` in results, or even `Bam`. `Bam` was filtered out by `x.status === "fulfilled"`
+ * - Use `try-catch` if `await`-ed value can throw errors.
+ * - Do not `await` for literal values, only thenable.
+ * - Always explicitly provide returned type in async function definition
  */

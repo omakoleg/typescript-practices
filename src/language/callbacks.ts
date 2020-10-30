@@ -64,24 +64,21 @@ const fileToUpdate = "/tmp/some-file.txt";
 stat(fileToUpdate, (err: Err, stats: any) => {
   if (err) {
     return console.error(`Stats error: ${err}`);
-  } else {
-    console.log(`File stats: ${stats}`);
-    readFile(fileToUpdate, (errRead: Err, contents: any) => {
-      if (errRead) {
-        return console.error(`File reading error: ${errRead}`);
-      } else {
-        const newContents = `${contents}-updated`;
-        // throw new Error(`Nobody will handle me`)
-        writeFile(fileToUpdate, newContents, (errWrite: Err) => {
-          if (errWrite) {
-            return console.error(`File writing error: ${errRead}`);
-          } else {
-            console.log(`Write finished`);
-          }
-        });
-      }
-    });
   }
+  console.log(`File stats: ${stats}`);
+  readFile(fileToUpdate, (errRead: Err, contents: any) => {
+    if (errRead) {
+      return console.error(`File reading error: ${errRead}`);
+    }
+    const newContents = `${contents}-updated`;
+    // throw new Error(`Nobody will handle me`)
+    writeFile(fileToUpdate, newContents, (errWrite: Err) => {
+      if (errWrite) {
+        return console.error(`File writing error: ${errRead}`);
+      }
+      console.log(`Write finished`);
+    });
+  });
 });
 /**
  * Maintaining such code is complex and easy to make mistakes

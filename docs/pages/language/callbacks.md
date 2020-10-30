@@ -69,28 +69,25 @@ const fileToUpdate = "/tmp/some-file.txt";
 stat(fileToUpdate, (err: Err, stats: any) => {
   if (err) {
     return console.error(`Stats error: ${err}`);
-  } else {
-    console.log(`File stats: ${stats}`);
-    readFile(fileToUpdate, (errRead: Err, contents: any) => {
-      if (errRead) {
-        return console.error(`File reading error: ${errRead}`);
-      } else {
-        const newContents = `${contents}-updated`;
-        // throw new Error(`Nobody will handle me`)
-        writeFile(fileToUpdate, newContents, (errWrite: Err) => {
-          if (errWrite) {
-            return console.error(`File writing error: ${errRead}`);
-          } else {
-            console.log(`Write finished`);
-          }
-        });
-      }
-    });
   }
+  console.log(`File stats: ${stats}`);
+  readFile(fileToUpdate, (errRead: Err, contents: any) => {
+    if (errRead) {
+      return console.error(`File reading error: ${errRead}`);
+    }
+    const newContents = `${contents}-updated`;
+    // throw new Error(`Nobody will handle me`)
+    writeFile(fileToUpdate, newContents, (errWrite: Err) => {
+      if (errWrite) {
+        return console.error(`File writing error: ${errRead}`);
+      }
+      console.log(`Write finished`);
+    });
+  });
 });
 ```
 
-[open code in online editor](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAbzgZxgQxgGjlApmgEwDFgAbXbAdymBlxPLgF84AzKCEOAIleW4DcAKCEwAnmFxwAolChwAvHAByEArgBSAZQB0sqADsI0gB4BjXGBjAIBuAB84BgK6lSws7dRsyuACoQAKpgBBhSStwA9DDgkcicuAC0rL46MCYwgiKoGAAUKeQBwaF02Lm4cgBcMnLYOTDI1WgGYgCUigB8iEJwcMCscOVy7Qg9vTi4MM6GcJ4G8eQ6FRxQuQAGWugNcMvQ1QAkCMtMa63CvSy4pMhSo+OzXhCLpBAA5usMUvWNcIffJ2cxr08IRPvlfEUQmEyssAEr4AjVfTYOZ0AwNJotdoKLp3e59AZDKDwwgjIH4vBTGZzBa4JZyaAfXwTQjAAyvHYMqAHI5yEkEAHnfGXa63cn3GnwAy4SgAYVsaO2SjWh1RuHRyCYiWcULoBDWQvxcEikTgMAAFhxKE4ZTUVutVAAjNRiOCUMikODm5oERggXCncXjai0ei+cGFIK6ig2uUK9UNGFyADqNDoSOGnW6Rvu-UGy1TobJOYpk2mdhpTzpu1Wa0+brTbI5NZ5cIRgqD9xFN2zJfGleeb3WhboPgMwGQ5tw+sBfeYneYs+F5KYS6YQlXAiAA)
+[open code in online editor](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAbzgZxgQxgGjlApmgEwDFgAbXbAdymBlxPLgF84AzKCEOAIleW4DcAKCEwAnmFxwAolChwAvHAByEArgBSAZQB0sqADsI0gB4BjXGBjAIBuAB84BgK6lSws7dRsyuACoQAKpgBBhSStwA9DDgkcicuAC0rL46MCYwgiKoGAAUKeQBwaF02Lm4cgBcMnLYOTDI1WgGYgCUigB8iEJwcMCscOVy7Qg9vTi4MM6GcJ4G8eQ6FRxQuQAGWugNcMvQ1QAkCMtMa63CvUxjcwu4OqQQAObrDFL1jXCHbydnY3iEL-lfEUQmEyssAEr4AjVfTYOZ0AwNJotdoKLqjcZ9AZDKCQwgjMaYvBTGbXCCLXarNYvCaEYAGB47OR7D5HOR4gjfc7jS6Y67wAy4SgAYVsCO2SjWh3huERyCYiWcILoBDW3N6kUicBgAAsOJQnEKait1qoAEZqMRwShkUhwHXNAiMEC4U6E600OgAgr+ILKiiGkVi2UNMFyADqntwMOGnW6mN6-UGy0jtFwBIT42J0zsZIpzKpNOotHpjMpBzZuKhXPdF1rsy85Nu9yea1TdB8BmAyB1uFVP0xTAHzB+Q4EQA)
 
 Maintaining such code is complex and easy to make mistakes
 

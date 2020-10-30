@@ -1,6 +1,8 @@
 # Using Promise
 
-`Promise<T>` can be either `pending` or `fulfilled` or `rejected`
+`Promise<T>` can be either `pending` or `fulfilled` or `rejected`. `fulfilled` and `rejected` are representing results.
+
+Every promise should eventually be resolved or rejected
 
 ```ts
 const promiseSample: Promise<number> = Promise.resolve(1);
@@ -13,7 +15,14 @@ Promise.resolve(1);
 Promise.reject(1);
 ```
 
-Every promise should eventually be resolved or rejected
+Constructor
+
+```
+new <T>(executor: (
+   resolve: (value?: T | PromiseLike<T>) => void,
+   reject: (reason?: any) => void) => void
+): Promise<T>;
+```
 
 ```ts
 new Promise<number>(
@@ -97,28 +106,28 @@ Promise.resolve(1)
 Chaining promise functions
 
 ```ts
-interface UserShapeP {
+interface UserShape {
   userId: number;
   name: string;
 }
-const loadUser = (userId: number): Promise<UserShapeP> =>
+const loadUser = (userId: number): Promise<UserShape> =>
   Promise.resolve({
     userId: 1,
     name: "Some user",
   });
 
-const logUser = (user: UserShapeP): Promise<UserShapeP> => {
-  console.log(user);
-  return Promise.resolve(user);
-};
-
-const capitalizeUser = (user: UserShapeP): Promise<UserShapeP> =>
+const capitalizeUser = (user: UserShape): Promise<UserShape> =>
   Promise.resolve({
     ...user,
     name: user.name.toUpperCase(),
   });
 
-const sendUser = (user: UserShapeP): Promise<any> => axios.post("url", user);
+const logUser = (user: UserShape): Promise<UserShape> => {
+  console.log(user);
+  return Promise.resolve(user);
+};
+
+const sendUser = (user: UserShape): Promise<any> => axios.post("url", user);
 
 loadUser(42)
   .then(capitalizeUser)
@@ -130,11 +139,14 @@ loadUser(42)
 Transforming callback function into Promise based
 
 ```ts
-import { readFile } from "fs";
+const plusOneCallback = (
+  value: number,
+  cb: (err: Error | undefined, result: number) => void
+) => cb(undefined, value + 1);
 
-const promisedReadFile = (name: string) =>
+const plusOnePromise = (value: number) =>
   new Promise((resolve, reject) => {
-    readFile(name, (error, data) => {
+    plusOneCallback(value, (error, data) => {
       if (error) {
         return reject(error);
       }
@@ -142,12 +154,12 @@ const promisedReadFile = (name: string) =>
     });
   });
 
-promisedReadFile("test.txt").then(console.log);
+plusOnePromise(42).then(console.log);
 ```
 
-`fs.promises` recommended to use when `Promise` based functions are needed.
+## Promise helper functions
 
-## Promise.all
+### Promise.all
 
 Returns a single Promise that resolves to an array of the results of the input promises
 
@@ -179,7 +191,7 @@ Promise.all([promise11, promise22, promise33])
   .catch(console.error); // => 42
 ```
 
-## Promise.allSettled
+### Promise.allSettled
 
 Method returns a promise that resolves after all of the given promises have either fulfilled or rejected,
 with an array of objects that each describes the outcome of each promise.
@@ -187,23 +199,50 @@ with an array of objects that each describes the outcome of each promise.
 > You usually want to use `.allSettled` instead of `.all`
 
 ```ts
-const promise100 = Promise.resolve(3);
-const promise200 = new Promise((resolve, reject) => {
-  setTimeout(() => reject(100), 100);
-});
-Promise.allSettled([promise100, promise200]).then((results) => {
-  console.log(results);
-  // [
-  //   { status: 'fulfilled', value: 3 },
-  //   { status: 'rejected', reason: 100 }
-  // ]
-});
+function settledExample() {
+  const promise100 = Promise.resolve(3);
+  const promise200 = new Promise((resolve, reject) => {
+    setTimeout(() => reject(100), 100);
+  });
+  Promise.allSettled([promise100, promise200]).then((results) => {
+    console.log(results);
+    // [
+    //   { status: 'fulfilled', value: 3 },
+    //   { status: 'rejected', reason: 100 }
+    // ]
+    const finishedValues = results
+      .filter((x) => x.status === "fulfilled")
+      .map((x) => (x as PromiseFulfilledResult<number>).value);
+    console.log(finishedValues); // [ 3 ]
+  });
+}
+settledExample();
 ```
 
-## Promise.race
+### Promise.race
 
 Method returns a promise that fulfills or rejects as soon as one of the promises in an iterable fulfills or rejects,
 with the value or reason from that promise.
+
+```ts
+function raceSample() {
+  const apiCallSuccess = new Promise((res, rej) =>
+    setTimeout(() => res("Done"), 100)
+  );
+  const apiCallFailure = new Promise((res, rej) =>
+    setTimeout(() => rej("Error"), 100)
+  );
+  const timeoutPromise = (ms = 300) =>
+    new Promise((res, rej) => setTimeout(rej, ms));
+
+  const requestWithTimeout = <T>(request: Promise<T>, timeout = 300) =>
+    Promise.race([timeoutPromise(timeout), request]);
+
+  requestWithTimeout(apiCallSuccess).then(console.log);
+  requestWithTimeout(apiCallFailure).catch(console.error);
+}
+raceSample();
+```
 
 # More info
 

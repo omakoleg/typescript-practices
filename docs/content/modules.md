@@ -46,9 +46,9 @@ Name of the exported member could be changed:
 
 ```ts
 const abc: string = 100;
-export abc as normanName
+export abc as otherName
 // later
-import { normanName } from './'
+import { otherName } from './'
 ```
 
 ## Default exports
@@ -81,6 +81,12 @@ export const myValue = {
   a: 10,
 };
 // later
+import { MyType, myValue } from "./exp";
+```
+
+Combine namespaces and destructuring
+
+```ts
 import * as myFullModule, {MyType, myValue} from './exp'
 ```
 
