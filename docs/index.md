@@ -37,6 +37,7 @@ in day-to-day work.
 | [Node.js](./content/nodejs-lib.md)                   | Node.js modules and globals               |
 | [TSDocs](./content/tsdocs.md)                        | source code documentation                 |
 | [Async arrays](./pages/topics/array-async.md) \*     | async functions is `map`, `reduce`, etc   |
+| [Custom Errors](./pages/topics/errors.md) \*         | Error, extend Error, catch                |
 
 ### Practical Concepts
 

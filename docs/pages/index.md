@@ -25,3 +25,5 @@
 - [language/variables.md](./language/variables.md)
 
 - [topics/array async.md](./topics/array-async.md)
+
+- [topics/errors.md](./topics/errors.md)

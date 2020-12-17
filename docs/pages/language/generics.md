@@ -1,4 +1,4 @@
-# Cenerics
+# Generics
 
 Usual use cases:
 
