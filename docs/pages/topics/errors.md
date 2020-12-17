@@ -1,5 +1,7 @@
 ## Errors
 
+**practical part: `yarn lesson-errors`**
+
 There are multiple strategies how to handle an error.
 
 It is always performed by `try-catch` statement.
@@ -110,11 +112,12 @@ errorFinally();
 
 ### Custom Errors
 
-Custom errors can be thrown as well. To be able to it, just extend `Error` class, and throw newly created instance.
+Custom errors can be thrown as well. To be able to do it, just extend `Error` class, and throw newly created instance.
+
+> Remember: Do not `throw` anything except Error or it's subclasses
 
 ```ts
 class InvalidInputError extends Error {
-  code = "SOME_INVALID_INPUT";
   constructor(message: string) {
     super(message);
     this.name = "InvalidInputError";
@@ -127,8 +130,15 @@ try {
     throw new InvalidInputError("Some field is not valid");
   }
 } catch (e) {
+  console.log(e.name); // InvalidInputError
+  console.log(e.message); // Some field is not valid
+  console.log(e.stack);
+  // Some field is not valid
+  // Error
+  //    at new InvalidInputError (...)
+  //    at eval (...)
   console.log(`Error happened: ${e}`); // Error happened: InvalidInputError: Some field is not valid
 }
 ```
 
-[open code in online editor](https://www.typescriptlang.org/play?#code/MYGwhgzhAECSB2A3MICWATBAHArgFwFEAnIgeyOgFMAPPS+dGYsigbwChpphT1LoAvNABEAZQDyAWQIB9WADkAagEEAMrAAic+QAUAqgBVhAbk7dS8CHiI5gecgAoAtpShgA5pQBc0K0VTw7gCU0BxcXBA4WJREzq4QHpRBpuHQeAAWqBAAdPBgLoIiCMhomPC4hCTkJmZcGVnZVmDAANaFAAYAJKz1OS5ungC+ADrw3fCUAO7QzI5BjXjNLYPtKdCD7Bs8lnjQASUYiig4-EIAjAAMF6bWAJ6hZqgAZtAO+yiHx-wAfNAXIWFwhkyNMJtNih8yhVZrExKQCk9UJQQOg9jB4KRdgd0MJkmYNoNuGA8MB0q8kg8uNsIKQQJRsiBSO4HO0YdB0mAsNEJugfN1KCtktAAPTCmZVCgcrn0Si8uBISHYfAwnyieH8RHI1FZaAYrGQzbsIA)
+[open code in online editor](https://www.typescriptlang.org/play?#code/MYGwhgzhAECSB2A3MICWATBAHArgFwFEAnIgeyOgFMAPPS+dGYsigbwChpphT4I8iOYHnIAKALaUoYAOaUAXNH5FU8GQEpoHLlwg4slIhKkRZldQG5OOvAAtUEAHTwwk6AF5oAIgTI0meFxCEnIvKx1oOwdHfjBgAGsPaAADABJWKKdJaTkAXwAdeHT4SgB3aGYxdRi8OPjc5PDoXPYWnj48aFU-DAA1FBxKJIBGAAZRqwEATy1rVAAzaFFulD6BoYA+aFHNbRtbMnKS8t9VgKDKoy8AZVI3edRKEHQumHhSTp70L0trFtzuGA8MBbEtzLMuO0IKQQJRHCBSDJRHCXJJLNAAPQYuBIM7YfCXaxQmFwhFIuHZUxydFY6C3e6PZ6vaDvT5nIm8aGw+GI5E1Oq-Li0+lDB5PF4OFkfaBfay0wlC7E6IEsso4r744IsJaOXXqOVKrgqyh+HV6jl8Ek8pHJS7QWxgLAGEroRTpSgNGnYu0Op30Siu9V4wIEkJERQi6BipmS1ky9ktIA)

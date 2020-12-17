@@ -1,6 +1,8 @@
 /**
  * ## Errors
  *
+ * **practical part: `yarn lesson-errors`**
+ *
  * There are multiple strategies how to handle an error.
  *
  * It is always performed by `try-catch` statement.
@@ -100,11 +102,12 @@ errorFinally();
 /**
  * ### Custom Errors
  *
- * Custom errors can be thrown as well. To be able to it, just extend `Error` class, and throw newly created instance.
+ * Custom errors can be thrown as well. To be able to do it, just extend `Error` class, and throw newly created instance.
+ *
+ * > Remember: Do not `throw` anything except Error or it's subclasses
  */
 // @playground-link
 class InvalidInputError extends Error {
-  code = "SOME_INVALID_INPUT";
   constructor(message: string) {
     super(message);
     this.name = "InvalidInputError";
@@ -117,5 +120,12 @@ try {
     throw new InvalidInputError("Some field is not valid");
   }
 } catch (e) {
+  console.log(e.name); // InvalidInputError
+  console.log(e.message); // Some field is not valid
+  console.log(e.stack);
+  // Some field is not valid
+  // Error
+  //    at new InvalidInputError (...)
+  //    at eval (...)
   console.log(`Error happened: ${e}`); // Error happened: InvalidInputError: Some field is not valid
 }
