@@ -15,29 +15,29 @@ in day-to-day work.
 
 ### Typescript Language
 
-|                                                                            | Includes                                                                  |
-| -------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| [Variables](./pages/language/variables.md)\*                               | let, const, scoping                                                       |
-| [Basic types](./pages/language/basic-types.md)\*                           | common types                                                              |
-| [Type & interface](./pages/language/type-interface.md) \*                  | definition, recursive, combining                                          |
-| [Destructuring and spread](./pages/language/destructuring-and-spread.md)\* | for: tuples, array, objects                                               |
-| [Function](./pages/language/function.md) \*                                | type definitions for regular, async , curried functions. `this` capturing |
-| [Modules](./content/modules.md)                                            | import, export, default export                                            |
-| [Callbacks](./pages/language/callbacks.md) \*                              | usage, maintenance complexity                                             |
-| [Promise](./pages/language/promise.md) \*                                  | chaining, error handling, parallel processing                             |
-| [async/await](./pages/language/async-await.md) \*                          | error handling, parallel and sequential processing                        |
-| [Classes](./pages/language/classes.md) \*                                  | members definitions                                                       |
+|                                                                            | Includes                                                                  | Practice             |
+| -------------------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------------- |
+| [Variables](./pages/language/variables.md)\*                               | let, const, scoping                                                       | `lesson-variables`   |
+| [Basic types](./pages/language/basic-types.md)\*                           | common types                                                              | `lesson-basic-types` |
+| [Type & interface](./pages/language/type-interface.md) \*                  | definition, recursive, combining                                          |                      |
+| [Destructuring and spread](./pages/language/destructuring-and-spread.md)\* | for: tuples, array, objects                                               |                      |
+| [Function](./pages/language/function.md) \*                                | type definitions for regular, async , curried functions. `this` capturing |                      |
+| [Modules](./content/modules.md)                                            | import, export, default export                                            |                      |
+| [Callbacks](./pages/language/callbacks.md) \*                              | usage, maintenance complexity                                             |                      |
+| [Promise](./pages/language/promise.md) \*                                  | chaining, error handling, parallel processing                             |                      |
+| [async/await](./pages/language/async-await.md) \*                          | error handling, parallel and sequential processing                        | `lesson-async-await` |
+| [Classes](./pages/language/classes.md) \*                                  | members definitions                                                       |                      |
 
 ### Advanced topics
 
-|                                                      | Includes                                  |
-| ---------------------------------------------------- | ----------------------------------------- |
-| [Generics](./pages/language/generics.md) \*          | function, type, interface                 |
-| [Utility Types](./pages/language/utility-types.md)\* | Partial, Required, Record, Pick, Omit etc |
-| [Node.js](./content/nodejs-lib.md)                   | Node.js modules and globals               |
-| [TSDocs](./content/tsdocs.md)                        | source code documentation                 |
-| [Async arrays](./pages/topics/array-async.md) \*     | async functions is `map`, `reduce`, etc   |
-| [Custom Errors](./pages/topics/errors.md) \*         | Error, extend Error, catch                |
+|                                                      | Includes                                  | Practice        |
+| ---------------------------------------------------- | ----------------------------------------- | --------------- |
+| [Generics](./pages/language/generics.md) \*          | function, type, interface                 |                 |
+| [Utility Types](./pages/language/utility-types.md)\* | Partial, Required, Record, Pick, Omit etc |                 |
+| [Node.js](./content/nodejs-lib.md)                   | Node.js modules and globals               |                 |
+| [TSDocs](./content/tsdocs.md)                        | source code documentation                 |                 |
+| [Async arrays](./pages/topics/array-async.md) \*     | async functions is `map`, `reduce`, etc   |                 |
+| [Custom Errors](./pages/topics/errors.md) \*         | Error, extend Error, catch                | `lesson-errors` |
 
 ### Practical Concepts
 
@@ -54,7 +54,7 @@ Download this [repository](https://github.com/omakoleg/typescript-practices) and
 
 Tests can be fixed using lesson contents.
 
-`yarn && yarn lesson-errors`
+`yarn && yarn lesson-xxx`
 
 ### Notes
 

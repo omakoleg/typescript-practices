@@ -1,7 +1,5 @@
 ## Errors
 
-**practical part: `yarn lesson-errors`**
-
 There are multiple strategies how to handle an error.
 
 It is always performed by `try-catch` statement.
