@@ -25,7 +25,7 @@ in day-to-day work.
 | [Modules](./content/modules.md)                                            | import, export, default export                                            |                      |
 | [Callbacks](./pages/language/callbacks.md) \*                              | usage, maintenance complexity                                             |                      |
 | [Promise](./pages/language/promise.md) \*                                  | chaining, error handling, parallel processing                             |                      |
-| [async/await](./pages/language/async-await.md) \*                          | error handling, parallel and sequential processing                        | `lesson-async-await` |
+| [async/await](./pages/language/async-await.md) \*                          | async definitions, error handling                                         | `lesson-async-await` |
 | [Classes](./pages/language/classes.md) \*                                  | members definitions                                                       |                      |
 
 ### Advanced topics
@@ -36,7 +36,7 @@ in day-to-day work.
 | [Utility Types](./pages/language/utility-types.md)\* | Partial, Required, Record, Pick, Omit etc |                 |
 | [Node.js](./content/nodejs-lib.md)                   | Node.js modules and globals               |                 |
 | [TSDocs](./content/tsdocs.md)                        | source code documentation                 |                 |
-| [Async arrays](./pages/topics/array-async.md) \*     | async functions is `map`, `reduce`, etc   |                 |
+| [Async arrays](./pages/topics/array-async.md) \*     | async functions in `map`, `reduce`, etc   |                 |
 | [Custom Errors](./pages/topics/errors.md) \*         | Error, extend Error, catch                | `lesson-errors` |
 
 ### Practical Concepts
