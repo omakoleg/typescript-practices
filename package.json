@@ -12,7 +12,8 @@
     "lesson-errors": "yarn jest lessons/topics/errors.test.ts",
     "lesson-async-await": "yarn jest lessons/language/async-await.test.ts",
     "lesson-variables": "yarn jest lessons/language/variables.test.ts",
-    "lesson-basic-types": "yarn jest lessons/language/basic-types.test.ts"
+    "lesson-basic-types": "yarn jest lessons/language/basic-types.test.ts",
+    "lesson-dest-spread": "yarn jest lessons/language/dest-spread.test.ts"
   },
   "dependencies": {
     "@types/fs-extra": "^9.0.1",

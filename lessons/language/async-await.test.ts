@@ -1,8 +1,5 @@
 import { DynamoDB } from "aws-sdk";
-/**
- * Practical lesson for https://omakoleg.github.io/typescript-practices/pages/language/async-await.html
- */
-describe("[async-await] lessons/language/async-await.test.ts", () => {
+describe("async-await", () => {
   it("1. Await function", async () => {
     const makeApiRequest = async (id: number): Promise<number> =>
       Promise.resolve(id + 1);

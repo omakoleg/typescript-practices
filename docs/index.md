@@ -15,18 +15,18 @@ in day-to-day work.
 
 ### Typescript Language
 
-|                                                                            | Includes                                                                  | Practice             |
-| -------------------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------------- |
-| [Variables](./pages/language/variables.md)\*                               | let, const, scoping                                                       | `lesson-variables`   |
-| [Basic types](./pages/language/basic-types.md)\*                           | common types                                                              | `lesson-basic-types` |
-| [Type & interface](./pages/language/type-interface.md) \*                  | definition, recursive, combining                                          |                      |
-| [Destructuring and spread](./pages/language/destructuring-and-spread.md)\* | for: tuples, array, objects                                               |                      |
-| [Function](./pages/language/function.md) \*                                | type definitions for regular, async , curried functions. `this` capturing |                      |
-| [Modules](./content/modules.md)                                            | import, export, default export                                            |                      |
-| [Callbacks](./pages/language/callbacks.md) \*                              | usage, maintenance complexity                                             |                      |
-| [Promise](./pages/language/promise.md) \*                                  | chaining, error handling, parallel processing                             |                      |
-| [async/await](./pages/language/async-await.md) \*                          | async definitions, error handling                                         | `lesson-async-await` |
-| [Classes](./pages/language/classes.md) \*                                  | members definitions                                                       |                      |
+|                                                               | Includes                                                                  | Practice             |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------------- |
+| [Variables](./pages/language/variables.md)\*                  | let, const, scoping                                                       | `lesson-variables`   |
+| [Basic types](./pages/language/basic-types.md)\*              | common types                                                              | `lesson-basic-types` |
+| [Type & interface](./pages/language/type-interface.md) \*     | definition, recursive, combining                                          |                      |
+| [Destructuring and spread](./pages/language/dest-spread.md)\* | for: tuples, array, objects                                               | `lesson-dest-spread` |
+| [Function](./pages/language/function.md) \*                   | type definitions for regular, async , curried functions. `this` capturing |                      |
+| [Modules](./content/modules.md)                               | import, export, default export                                            |                      |
+| [Callbacks](./pages/language/callbacks.md) \*                 | usage, maintenance complexity                                             |                      |
+| [Promise](./pages/language/promise.md) \*                     | chaining, error handling, parallel processing                             |                      |
+| [async/await](./pages/language/async-await.md) \*             | async definitions, error handling                                         | `lesson-async-await` |
+| [Classes](./pages/language/classes.md) \*                     | members definitions                                                       |                      |
 
 ### Advanced topics
 

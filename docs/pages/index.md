@@ -8,7 +8,7 @@
 
 - [language/classes.md](./language/classes.md)
 
-- [language/destructuring and spread.md](./language/destructuring-and-spread.md)
+- [language/dest spread.md](./language/dest-spread.md)
 
 - [language/function.md](./language/function.md)
 

@@ -1,7 +1,4 @@
-/**
- * Practical lesson for http://localhost:4000/pages/language/basic-types.html
- */
-describe("[basic-types] lessons/language/basic-types.test.ts", () => {
+describe("basic-types", () => {
   it("1. Symbol", () => {
     let symbolYes1 = Symbol("yes");
     // TODO: Update right side of assignment to pass the test

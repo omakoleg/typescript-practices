@@ -1,7 +1,4 @@
-/**
- * Practical lesson for http://localhost:4000/pages/language/variables.html
- */
-describe("[variables] lessons/language/variables.test.ts", () => {
+describe("variables", () => {
   it("1. Sample variable assignments", () => {
     // TODO: Fix to match `expect`
     const one = "on";
