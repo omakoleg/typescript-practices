@@ -16,8 +16,6 @@
 
 - [language/promise.md](./language/promise.md)
 
-- [language/replace class.md](./language/replace-class.md)
-
 - [language/type interface.md](./language/type-interface.md)
 
 - [language/utility types.md](./language/utility-types.md)
@@ -27,3 +25,5 @@
 - [topics/array async.md](./topics/array-async.md)
 
 - [topics/errors.md](./topics/errors.md)
+
+- [topics/replace class.md](./topics/replace-class.md)

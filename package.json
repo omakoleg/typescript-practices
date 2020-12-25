@@ -10,10 +10,12 @@
     "markdown": "./scripts/markdown.sh",
     "format": "prettier --write .",
     "lesson-errors": "yarn jest lessons/topics/errors.test.ts",
+    "lesson-replace-class": "yarn jest lessons/topics/replace-class.test.ts",
     "lesson-async-await": "yarn jest lessons/language/async-await.test.ts",
     "lesson-variables": "yarn jest lessons/language/variables.test.ts",
     "lesson-basic-types": "yarn jest lessons/language/basic-types.test.ts",
-    "lesson-dest-spread": "yarn jest lessons/language/dest-spread.test.ts"
+    "lesson-dest-spread": "yarn jest lessons/language/dest-spread.test.ts",
+    "lesson-array-async": "yarn jest lessons/topics/array-async.test.ts"
   },
   "dependencies": {
     "@types/fs-extra": "^9.0.1",
