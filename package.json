@@ -15,23 +15,24 @@
     "lesson-variables": "yarn jest lessons/language/variables.test.ts",
     "lesson-basic-types": "yarn jest lessons/language/basic-types.test.ts",
     "lesson-dest-spread": "yarn jest lessons/language/dest-spread.test.ts",
-    "lesson-array-async": "yarn jest lessons/topics/array-async.test.ts"
+    "lesson-array-async": "yarn jest lessons/topics/array-async.test.ts",
+    "lesson-function": "yarn jest lessons/language/function.test.ts"
   },
   "dependencies": {
-    "@types/fs-extra": "^9.0.1",
+    "@types/fs-extra": "^9.0.6",
     "@types/glob": "^7.1.3",
-    "@types/jest": "^26.0.19",
+    "@types/jest": "^26.0.20",
     "@types/lz-string": "^1.3.34",
-    "@types/node": "^14.11.2",
-    "aws-sdk": "^2.766.0",
-    "axios": "^0.20.0",
+    "@types/node": "^14.14.20",
+    "aws-sdk": "^2.824.0",
+    "axios": "^0.21.1",
     "fs-extra": "^9.0.1",
     "glob": "^7.1.6",
     "jest": "^26.6.3",
     "lz-string": "^1.4.4",
-    "prettier": "^2.1.2",
+    "prettier": "^2.2.1",
     "ts-jest": "^26.4.4",
-    "typescript": "^4.0.3"
+    "typescript": "^4.1.3"
   },
   "jest": {
     "testEnvironment": "node",
