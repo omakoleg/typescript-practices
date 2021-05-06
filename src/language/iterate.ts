@@ -44,12 +44,12 @@ for (let [key, value] of array3.entries()) {
  *
  * ## For-of
  *
- * To have the same approach as for an array, use `Object.values()`
+ * To have the same approach as for an array, use `Object.values()` to iterate over values
  */
 // @playground-link
 const obj1 = { one: 10, two: 20, three: 30 };
-for (let k of Object.values(obj1)) {
-  console.log(k);
+for (let v of Object.values(obj1)) {
+  console.log(v);
   // 10
   // 20
   // 30
@@ -60,8 +60,8 @@ for (let k of Object.values(obj1)) {
  * Same as for arrays, iterate over keys
  */
 const obj2 = { one: 10, two: 20, three: 30 };
-for (let v in obj2) {
-  console.log(v);
+for (let k in obj2) {
+  console.log(k);
   // "one"
   // "two"
   // "three"
