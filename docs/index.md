@@ -27,6 +27,7 @@ in day-to-day work.
 | [Promise](./pages/language/promise.md) \*                     | chaining, error handling, parallel processing                             |                      |
 | [async/await](./pages/language/async-await.md) \*             | async definitions, error handling                                         | `lesson-async-await` |
 | [Classes](./pages/language/classes.md) \*                     | members definitions                                                       |                      |
+| [Iterate Array/Object](./pages/language/iterate.md) \*        | for..of, for..in, Object alternatives                                     |                      |
 
 ### Advanced topics
 

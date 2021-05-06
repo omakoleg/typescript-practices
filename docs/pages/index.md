@@ -14,6 +14,8 @@
 
 - [language/generics.md](./language/generics.md)
 
+- [language/iterate.md](./language/iterate.md)
+
 - [language/promise.md](./language/promise.md)
 
 - [language/type interface.md](./language/type-interface.md)
