@@ -31,7 +31,7 @@
     "glob": "^7.1.7",
     "jest": "^26.6.3",
     "lz-string": "^1.4.4",
-    "prettier": "^2.3.0",
+    "prettier": "^2.3.1",
     "ts-jest": "^26.5.6",
     "typescript": "^4.2.4"
   },
