@@ -15,39 +15,39 @@ in day-to-day work.
 
 ### Typescript Language
 
-|                                                               | Includes                                                                  | Practice             |
-| ------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------------- |
-| [Variables](./pages/language/variables.md)\*                  | let, const, scoping                                                       | `lesson-variables`   |
-| [Basic types](./pages/language/basic-types.md)\*              | common types                                                              | `lesson-basic-types` |
-| [Type & interface](./pages/language/type-interface.md) \*     | definition, recursive, combining                                          |                      |
-| [Destructuring and spread](./pages/language/dest-spread.md)\* | for: tuples, array, objects                                               | `lesson-dest-spread` |
-| [Function](./pages/language/function.md) \*                   | type definitions for regular, async , curried functions. `this` capturing |                      |
-| [Modules](./content/modules.md)                               | import, export, default export                                            | -                    |
-| [Callbacks](./pages/language/callbacks.md) \*                 | usage, maintenance complexity                                             |                      |
-| [Promise](./pages/language/promise.md) \*                     | chaining, error handling, parallel processing                             |                      |
-| [async/await](./pages/language/async-await.md) \*             | async definitions, error handling                                         | `lesson-async-await` |
-| [Classes](./pages/language/classes.md) \*                     | members definitions                                                       |                      |
-| [Iterate Array/Object](./pages/language/iterate.md) \*        | for..of, for..in, Object alternatives                                     |                      |
+|                                                               | Includes                                                                  | 
+| ------------------------------------------------------------- | ------------------------------------------------------------------------- | 
+| [Variables](./pages/language/variables.md)\*                  | let, const, scoping                                                       | 
+| [Basic types](./pages/language/basic-types.md)\*              | common types                                                              | 
+| [Type & interface](./pages/language/type-interface.md) \*     | definition, recursive, combining                                          |                      
+| [Destructuring and spread](./pages/language/dest-spread.md)\* | for: tuples, array, objects                                               | 
+| [Function](./pages/language/function.md) \*                   | type definitions for regular, async , curried functions. `this` capturing | 
+| [Modules](./content/modules.md)                               | import, export, default export                                            | 
+| [Callbacks](./pages/language/callbacks.md) \*                 | usage, maintenance complexity                                             | 
+| [Promise](./pages/language/promise.md) \*                     | chaining, error handling, parallel processing                             |
+| [async/await](./pages/language/async-await.md) \*             | async definitions, error handling                                         |
+| [Classes](./pages/language/classes.md) \*                     | members definitions                                                       | 
+| [Iterate Array/Object](./pages/language/iterate.md) \*        | for..of, for..in, Object alternatives                                     |
 
 ### Advanced topics
 
-|                                                      | Includes                                  | Practice              |
-| ---------------------------------------------------- | ----------------------------------------- | --------------------- |
-| [Generics](./pages/language/generics.md) \*          | function, type, interface                 |                       |
-| [Utility Types](./pages/language/utility-types.md)\* | Partial, Required, Record, Pick, Omit etc |                       |
-| [Node.js](./content/nodejs-lib.md)                   | Node.js modules and globals               | -                     |
-| [TSDocs](./content/tsdocs.md)                        | source code documentation                 | -                     |
-| [Async arrays](./pages/topics/array-async.md) \*     | async functions in `map`, `reduce`, etc   | `lesson-array-async"` |
-| [Custom Errors](./pages/topics/errors.md) \*         | Error, extend Error, catch                | `lesson-errors`       |
+|                                                      | Includes                                  | 
+| ---------------------------------------------------- | ----------------------------------------- 
+| [Generics](./pages/language/generics.md) \*          | function, type, interface                 | 
+| [Utility Types](./pages/language/utility-types.md)\* | Partial, Required, Record, Pick, Omit etc |
+| [Node.js](./content/nodejs-lib.md)                   | Node.js modules and globals               |
+| [TSDocs](./content/tsdocs.md)                        | source code documentation                 |
+| [Async arrays](./pages/topics/array-async.md) \*     | async functions in `map`, `reduce`, etc   |
+| [Custom Errors](./pages/topics/errors.md) \*         | Error, extend Error, catch                |
 
 ### Practical Concepts
 
-|                                                         | Includes                                                           | Practice               |
-| ------------------------------------------------------- | ------------------------------------------------------------------ | ---------------------- |
-| [Class replacement](./pages/topics/replace-class.md) \* | use builder function instead of `class` definition                 | `lesson-replace-class` |
-| [Useful libraries](./content/useful-libraries.md)       | walk thru some commonly used libraries                             |                        |
-| [jest](./content/jest.md)                               | writing tests, configuration, mocks, expectations, `jest-dynamodb` |                        |
-| [AWS Lambda](./content/lambda.md)                       | `@types/aws-lambda`, env, caching, DI, aws-sdk faking for tests    |                        |
+|                                                         | Includes                                                           |
+| ------------------------------------------------------- | ------------------------------------------------------------------ |
+| [Class replacement](./pages/topics/replace-class.md) \* | use builder function instead of `class` definition                 |
+| [Useful libraries](./content/useful-libraries.md)       | walk thru some commonly used libraries                             |
+| [jest](./content/jest.md)                               | writing tests, configuration, mocks, expectations, `jest-dynamodb` |
+| [AWS Lambda](./content/lambda.md)                       | `@types/aws-lambda`, env, caching, DI, aws-sdk faking for tests    |
 
 ### Notes
 
