@@ -49,14 +49,6 @@ in day-to-day work.
 | [jest](./content/jest.md)                               | writing tests, configuration, mocks, expectations, `jest-dynamodb` |                        |
 | [AWS Lambda](./content/lambda.md)                       | `@types/aws-lambda`, env, caching, DI, aws-sdk faking for tests    |                        |
 
-### Practical lessons
-
-Download this [repository](https://github.com/omakoleg/typescript-practices) and execute `jest` tests for a specific lesson.
-
-Tests can be fixed using lesson contents.
-
-`yarn && yarn lesson-xxx`
-
 ### Notes
 
 Generated pages index:

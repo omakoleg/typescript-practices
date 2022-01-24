@@ -42,8 +42,9 @@ const divide = (
       return cb(new Error(`Cant divide by 0`));
     }
     cb(undefined, a / b); // this returns `Infinity`
-  } catch (e) {
-    cb(e.toString());
+  } catch (e: unknown) {
+    if (e instanceof Error) cb(e);
+    return cb(Error((e as any).toString()));
   }
 };
 const callback = (err?: Error, result?: number) => {
@@ -56,7 +57,7 @@ divide(1, 1, callback); // prints: "result 1"
 divide(1, 0, callback); // prints: "error happened Error: Cant divide by 0"
 ```
 
-[open code in online editor](https://www.typescriptlang.org/play?#code/MYewdgzgLgBAJgSwG4LgUxgXhgCgFAwwCGAXDGAK4C2ARmgE4A0BMNZltDzhwbuD9APxkAovXogmMemggUANlGHlqdegEosAPhhIQqPJsw6A3iyj0AnjDOFCCAGa4aWTNgAMm23cIyoFejAYXhwwNAB3GDEJehwAAwBhIjBYRBR0Vmt3OPV1AG4WQgBfQuCaHAowdAcEMLhGYhgAelZ85paoAAsECGk0f0DeuIBJMBqwBChLOJYi4KIoYE7+L1KQtAA6KBAAZQtagHMcXILivCKC0EhYYCJ5eRoiYABrLH5xZWjJBpk5RWUOGojKYWI53hobKU-AEglcICB5Jt5CAjgAiASSGCdIgABxxaDqqIaAnysxYcIRSJROFRvwUUCJfT+UFJFzwaVQaBwAEYGrz5vdHi82k0Wjj6LUoBAyLTZPSYNzUezkJyeQ13A1boKns8RWKJSlpTB0eJMdi8QS0HAoqb6GQkil4CqMjQsqigA)
+[open code in online editor](https://www.typescriptlang.org/play?#code/MYewdgzgLgBAJgSwG4LgUxgXhgCgFAwwCGAXDGAK4C2ARmgE4A0BMNZltDzhwbuD9APxkAovXogmMemggUANlGHlqdegEosAPhhIQqPJsw6A3iyj0AnjDOFCCAGa4aWTNgAMm23cIyoFejAYXhwwNAB3GDEJehwAAwBhIjBYRBR0Vmt3OPV1AG4WQgBfQuCaHAowdAcEMLhGYhgAelZ85paoAAsECGk0f0DeuIBJMBqwBChLOJYi4KIoYE7+MkqAazAQcLAvUsd+GFroZOA0ECdoyU0QtHzSvwCgkMvYnAwiXuTLdQA6KBAAMoWWoAcxwuTuxTwRQKoEgsGARHk8hoRGAayw-HEyheDRkckUyg4aiMphY+ze4l2PgegWC4AgIHkaB+8hAYIARAJJDBOkQAA78tB1DkNASQmAlHgMpkstmc-EKKCivoEqB3GF4NKoNA4ACMDQN82RqPRbSaLX59FqUAgZA5isUMD1HK1yB1+oa7gaiJNaLW5st1pSdpgXPEPL5guFaDgUQj9DISRS8HdGRoWQ5QA)
 
 When many callbacks are used it is easy to mess-up things and produce complex code
 

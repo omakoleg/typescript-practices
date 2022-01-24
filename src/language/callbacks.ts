@@ -40,8 +40,9 @@ const divide = (
       return cb(new Error(`Cant divide by 0`));
     }
     cb(undefined, a / b); // this returns `Infinity`
-  } catch (e) {
-    cb(e.toString());
+  } catch (e: unknown) {
+    if (e instanceof Error) cb(e);
+    return cb(Error((e as any).toString()));
   }
 };
 const callback = (err?: Error, result?: number) => {

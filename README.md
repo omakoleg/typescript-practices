@@ -4,11 +4,6 @@ Typescript training materials
 
 Include practices for building common applications
 
-Practical lessons are implemented as `jest` tests.
-For a full list please check `package.json` `scripts` section.
-
-Sample lesson tests: `yarn lesson-errors`
-
 ## Development
 
 Shell scripts:
@@ -23,4 +18,3 @@ Shell scripts:
   Code in `src/` prefixed with `// @playground-link` will have link to typescript playground
   containing code where this comment was mentioned
 
-- `yarn jest` - Execute all tests for lessons

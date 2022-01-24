@@ -8,20 +8,22 @@ It is always performed by `try-catch` statement.
 
 [Read more at MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch)
 
+With a recent introduction of `unknown` type in a 'catch' block, value whould be first checked to be an error: `if (e instanceof Error) { ... }`
+
 ### Catch all
 
 ```ts
 function throwError() {
   try {
     throw new Error("My Error");
-  } catch (e) {
+  } catch (e: unknown) {
     console.log(e);
   }
 }
 throwError();
 ```
 
-[open code in online editor](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABFAFgJzgdwKJo2gCgEpEBvAKEWTQE8zKrl0tEwBTTRXfAgIgFk63OGl5EA3AwC+iCAEMoEFIgJsSFRrIQBnOABs2AOj1wA5qonTyU8qgw48I4uKA)
+[open code in online editor](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABFAFgJzgdwKJo2gCgEpEBvAKEWTQE8zKrl0tEwBTTRXfAgIgFk63OGl5EA3AwC+iCAEMoEFIgJsAXInABrMFjAkKjWQgDOcADZsAdObgBzVROnkp5VBhx4RxcUA)
 
 ### Re-throwing errors
 
@@ -32,7 +34,7 @@ on higher levels.
 function reThrow() {
   try {
     throw new Error("My Error");
-  } catch (e) {
+  } catch (e: unknown) {
     console.log(`Error happened: ${e}`);
     throw e;
   }
@@ -40,7 +42,7 @@ function reThrow() {
 reThrow();
 ```
 
-[open code in online editor](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAJwKYBUAWy4HcAUAlIgN4BQiiUyAnqRZVdnomKrogKLI7L4BEAWTrde-QgG4GAX0QQAhlAiZE+VMXKM5CAM5wANqgB0+uAHN8AA1FxkiTPIAOj1GwAmALkQASEqmmWkgyUUMwcqFKU0mTRaFg4BJJAA)
+[open code in online editor](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABAJwKYBUAWy4HcAUAlIgN4BQiiUyAnqRZVdnomKrogKLI7L4BEAWTrde-QgG4GAX0QQAhlAiZE+VAC5E4ANZg8YYuUZyEAZzgAbVADoLcAOb4ABqLjJEmeQAcvqNgBNNABISVGknSQZKKGYOVClKaTIktCwcAkkgA)
 
 ### Catching only subset
 
@@ -72,21 +74,23 @@ Or as variation use `switch` case:
 function filterErrorSwitch() {
   try {
     throw new TypeError("Bad Type");
-  } catch (e) {
-    switch (e.constructor) {
-      case TypeError:
-      case RangeError:
-        console.log(`Expected error: ${e}`);
-        break;
-      default:
-        throw e;
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      switch (e.constructor) {
+        case TypeError:
+        case RangeError:
+          console.log(`Expected error: ${e}`);
+          break;
+        default:
+          throw e;
+      }
     }
   }
 }
 filterErrorSwitch();
 ```
 
-[open code in online editor](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABMGAbKBTATgUS1uLAZQHcYoIALACgEpEBvAKEUSiwE9GXW3KCSiMBkEAVDgAcMeAlmoAiAEIBDACaJxU+bQDcPAL6IIyipUTUM9Zr0QBnMqfMYAdBAS32IaISs8bx2wwNSWl8QgAuP14AoIAlZTAAc1DZSJt-dzhUF1Q4ROoAAxwADyloDHVsVMQAEgYMfQLdKJsAIywMZQBrPXTEVQxgZRB0NL6+AUQMXt59AyY5lHRsGUJScio6PSA)
+[open code in online editor](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABMGAbKBTATgUS1uLAZQHcYoIALACgEpEBvAKEUSiwE9GXW3KCSiMBkEAVDgAcMeAlmoAiAEIBDACaJxU+bQDcPAL6IIyipUTUMALkTgA1mDgkw9Zr0Qxg5jO7ABnKMqQGHCeMoQuPG6+ZKZeAHQQCP5YINDh3G5uxr7emtL4hJaRmdneAEqBAOb5skWZJUlwqBhxqHCV1AAGOAAeUtAY6ti1iAAkDBj6nbrF9QBGWBjKtnr1rKoYwMog6HVrrFD8jogYq5n6xResFxco6NhhxDFUdHpAA)
 
 ### Use finally
 
@@ -127,16 +131,18 @@ try {
   if (invalidValue > 0) {
     throw new InvalidInputError("Some field is not valid");
   }
-} catch (e) {
-  console.log(e.name); // InvalidInputError
-  console.log(e.message); // Some field is not valid
-  console.log(e.stack);
-  // Some field is not valid
-  // Error
-  //    at new InvalidInputError (...)
-  //    at eval (...)
-  console.log(`Error happened: ${e}`); // Error happened: InvalidInputError: Some field is not valid
+} catch (e: unknown) {
+  if (e instanceof Error) {
+    console.log(e.name); // InvalidInputError
+    console.log(e.message); // Some field is not valid
+    console.log(e.stack);
+    // Some field is not valid
+    // Error
+    //    at new InvalidInputError (...)
+    //    at eval (...)
+    console.log(`Error happened: ${e}`); // Error happened: InvalidInputError: Some field is not valid
+  }
 }
 ```
 
-[open code in online editor](https://www.typescriptlang.org/play?#code/MYGwhgzhAECSB2A3MICWATBAHArgFwFEAnIgeyOgFMAPPS+dGYsigbwChpphT4I8iOYHnIAKALaUoYAOaUAXNH5FU8GQEpoHLlwg4slIhKkRZldQG5OOvAAtUEAHTwwk6AF5oAIgTI0meFxCEnIvKx1oOwdHfjBgAGsPaAADABJWKKdJaTkAXwAdeHT4SgB3aGYxdRi8OPjc5PDoXPYWnj48aFU-DAA1FBxKJIBGAAZRqwEATy1rVAAzaFFulD6BoYA+aFHNbRtbMnKS8t9VgKDKoy8AZVI3edRKEHQumHhSTp70L0trFtzuGA8MBbEtzLMuO0IKQQJRHCBSDJRHCXJJLNAAPQYuBIM7YfCXaxQmFwhFIuHZUxydFY6C3e6PZ6vaDvT5nIm8aGw+GI5E1Oq-Li0+lDB5PF4OFkfaBfay0wlC7E6IEsso4r744IsJaOXXqOVKrgqyh+HV6jl8Ek8pHJS7QWxgLAGEroRTpSgNGnYu0Op30Siu9V4wIEkJERQi6BipmS1ky9ktIA)
+[open code in online editor](https://www.typescriptlang.org/play?#code/MYGwhgzhAECSB2A3MICWATBAHArgFwFEAnIgeyOgFMAPPS+dGYsigbwChpphT4I8iOYHnIAKALaUoYAOaUAXNH5FU8GQEpoHLlwg4slIhKkRZldQG5OOvAAtUEAHTwwk6AF5oAIgTI0meFxCEnIvKx1oOwdHfjBgAGsPaAADABJWKKdJaTkAXwAdeHT4SgB3aGYxdRi8OPjc5PDoXPYWnj48aFU-DAA1FBxKJIBGAAZRqwEATy1rVAAzaFFulD6BoYA+aFHNbRtbMnKS8t9VgKDKoy8AZVI3edRKEHQumHhSTp70L0trFtzuGA8MBbEsFNAcPB4u9SvBdnNFqIhqpYvBgJRSItLvCIu0IKQQJRHCBSDIkc5XOYLNAAPQ0uBIM7YfCXaxcPEEokkslE7KmOSWWn0273R7PV7Qd6fM5s7i8fGE4mk8mxBK-CJ06AioYPJ4vBySj7QL6yzWsjX0nRAyVlBlfZnBFhLRwu9Smy1ca2UPzO12yjmK7miZKXaC2MBYAwldCKdKUBqCs0hCjhyP0Sgxu1MwIs5OKbXQXXig1S40yrj-dhAA)

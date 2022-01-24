@@ -188,39 +188,39 @@ export const eventHandler = eventHandlerInternal(
 `lib.ts` With implementation
 
 ```ts
-export const eventHandlerInternal = (
-  docClient: DynamoDB.DocumentClient,
-  ssm: SSM,
-  config: EnvConfig,
-  validator: Validator
-): DynamoDBStreamHandler => async (
-  event: DynamoDBStreamEvent
-): Promise<void> => {
-  const { Parameter } = await ssm
-    .getParameter({
-      Name: config.ssmConfigKey,
-    })
-    .promise();
-  const tableName = Parameter!.Value!;
-  const record = event.Records[0];
-  if (record.eventName === "INSERT") {
-    // decode payload
-    const recordData = DynamoDB.Converter.unmarshall(
-      record.dynamodb!.NewImage!
-    );
-    const isValid = await validator.validate(recordData);
-    if (isValid) {
-      await docClient
-        .put({
-          TableName: tableName,
-          Item: recordData,
-        })
-        .promise();
+export const eventHandlerInternal =
+  (
+    docClient: DynamoDB.DocumentClient,
+    ssm: SSM,
+    config: EnvConfig,
+    validator: Validator
+  ): DynamoDBStreamHandler =>
+  async (event: DynamoDBStreamEvent): Promise<void> => {
+    const { Parameter } = await ssm
+      .getParameter({
+        Name: config.ssmConfigKey,
+      })
+      .promise();
+    const tableName = Parameter!.Value!;
+    const record = event.Records[0];
+    if (record.eventName === "INSERT") {
+      // decode payload
+      const recordData = DynamoDB.Converter.unmarshall(
+        record.dynamodb!.NewImage!
+      );
+      const isValid = await validator.validate(recordData);
+      if (isValid) {
+        await docClient
+          .put({
+            TableName: tableName,
+            Item: recordData,
+          })
+          .promise();
+      }
+    } else {
+      console.log(`Skipped ${JSON.stringify(record)}`);
     }
-  } else {
-    console.log(`Skipped ${JSON.stringify(record)}`);
-  }
-};
+  };
 ```
 
 Here `eventHandlerInternal` is a curried function which returns Lambda event handler based
@@ -261,7 +261,7 @@ export const mockedDynamoDb = ({
   const putParams: DynamoDB.DocumentClient.PutItemInput[] = [];
   const batchWriteParams: DynamoDB.DocumentClient.BatchWriteItemInput[] = [];
   return {
-    docClient: ({
+    docClient: {
       batchWrite: (params: DynamoDB.DocumentClient.BatchWriteItemInput) => {
         batchWriteParams.push(params);
         return {
@@ -274,7 +274,7 @@ export const mockedDynamoDb = ({
           promise: () => Promise.resolve(putOutput),
         };
       },
-    } as unknown) as DynamoDB.DocumentClient,
+    } as unknown as DynamoDB.DocumentClient,
     putParams,
     batchWriteParams,
   };
@@ -300,14 +300,14 @@ interface MockedSSM {
 export const mockedSsm = ({ getParameter }: Props): MockedSSM => {
   const getParameterParams: GetParameterRequest[] = [];
   return {
-    ssm: ({
+    ssm: {
       getParameter: (p: GetParameterRequest) => {
         getParameterParams.push(p);
         return {
           promise: () => Promise.resolve(getParameter),
         };
       },
-    } as unknown) as SSM,
+    } as unknown as SSM,
     getParameterParams,
   };
 };

@@ -9,13 +9,15 @@
  *
  * [Read more at MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch)
  *
+ * With a recent introduction of `unknown` type in a 'catch' block, value whould be first checked to be an error: `if (e instanceof Error) { ... }`
+ *
  * ### Catch all
  */
 // @playground-link
 function throwError() {
   try {
     throw new Error("My Error");
-  } catch (e) {
+  } catch (e: unknown) {
     console.log(e);
   }
 }
@@ -30,7 +32,7 @@ throwError();
 function reThrow() {
   try {
     throw new Error("My Error");
-  } catch (e) {
+  } catch (e: unknown) {
     console.log(`Error happened: ${e}`);
     throw e;
   }
@@ -65,14 +67,16 @@ filterErrorInstanceOf();
 function filterErrorSwitch() {
   try {
     throw new TypeError("Bad Type");
-  } catch (e) {
-    switch (e.constructor) {
-      case TypeError:
-      case RangeError:
-        console.log(`Expected error: ${e}`);
-        break;
-      default:
-        throw e;
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      switch (e.constructor) {
+        case TypeError:
+        case RangeError:
+          console.log(`Expected error: ${e}`);
+          break;
+        default:
+          throw e;
+      }
     }
   }
 }
@@ -117,13 +121,15 @@ try {
   if (invalidValue > 0) {
     throw new InvalidInputError("Some field is not valid");
   }
-} catch (e) {
-  console.log(e.name); // InvalidInputError
-  console.log(e.message); // Some field is not valid
-  console.log(e.stack);
-  // Some field is not valid
-  // Error
-  //    at new InvalidInputError (...)
-  //    at eval (...)
-  console.log(`Error happened: ${e}`); // Error happened: InvalidInputError: Some field is not valid
+} catch (e: unknown) {
+  if (e instanceof Error) {
+    console.log(e.name); // InvalidInputError
+    console.log(e.message); // Some field is not valid
+    console.log(e.stack);
+    // Some field is not valid
+    // Error
+    //    at new InvalidInputError (...)
+    //    at eval (...)
+    console.log(`Error happened: ${e}`); // Error happened: InvalidInputError: Some field is not valid
+  }
 }

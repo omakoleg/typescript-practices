@@ -8,47 +8,22 @@
   "scripts": {
     "clean": "./scripts/clean.sh",
     "markdown": "./scripts/markdown.sh",
-    "format": "prettier --write .",
-    "lesson-errors": "yarn jest lessons/topics/errors.test.ts",
-    "lesson-replace-class": "yarn jest lessons/topics/replace-class.test.ts",
-    "lesson-async-await": "yarn jest lessons/language/async-await.test.ts",
-    "lesson-variables": "yarn jest lessons/language/variables.test.ts",
-    "lesson-basic-types": "yarn jest lessons/language/basic-types.test.ts",
-    "lesson-dest-spread": "yarn jest lessons/language/dest-spread.test.ts",
-    "lesson-array-async": "yarn jest lessons/topics/array-async.test.ts",
-    "lesson-function": "yarn jest lessons/language/function.test.ts"
+    "format": "prettier --write ."
   },
   "dependencies": {
-    "@types/fs-extra": "^9.0.11",
-    "@types/glob": "^7.1.3",
-    "@types/jest": "^26.0.23",
+    "@types/fs-extra": "^9.0.13",
+    "@types/glob": "^7.2.0",
+    "@types/jest": "^27.4.0",
     "@types/lz-string": "^1.3.34",
-    "@types/node": "^15.3.1",
-    "aws-sdk": "^2.922.0",
-
-    "axios": "^0.21.1",
+    "@types/node": "^17.0.10",
+    "aws-sdk": "^2.1062.0",
+    "axios": "^0.25.0",
     "fs-extra": "^10.0.0",
-    "glob": "^7.1.7",
-    "jest": "^26.6.3",
+    "glob": "^7.2.0",
+    "jest": "^27.4.7",
     "lz-string": "^1.4.4",
-    "prettier": "^2.3.1",
-    "ts-jest": "^26.5.6",
-    "typescript": "^4.2.4"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "tsconfig.json"
-      }
-    },
-    "testRegex": "/lessons/.*\\.test\\.ts?$",
-    "transform": {
-      "^.+\\.ts?$": "ts-jest"
-    },
-    "moduleFileExtensions": [
-      "ts",
-      "js"
-    ]
+    "prettier": "^2.5.1",
+    "ts-jest": "^27.1.3",
+    "typescript": "^4.5.5"
   }
 }
