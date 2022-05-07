@@ -61,15 +61,12 @@ const parseFile = (sources: string): ResultBlock[] => {
         type: "comment",
         lines: [line],
       });
-      console.log("(1)");
     } else if (startComment) {
       dumpCode();
       commentBuffer.push(trimmed);
       isCode = false;
-      console.log("(2)");
     } else if (!isCode && !endComment) {
       commentBuffer.push(trimmed);
-      console.log("(3)");
     } else if (!isCode && endComment) {
       commentBuffer.push(trimmed);
       resultingBlocks.push({
@@ -78,10 +75,8 @@ const parseFile = (sources: string): ResultBlock[] => {
       });
       isCode = true;
       commentBuffer = [];
-      console.log("(4)");
     } else {
       codeBuffer.push(line);
-      console.log("(5)");
     }
   }
   dumpCode();

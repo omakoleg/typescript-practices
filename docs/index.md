@@ -15,25 +15,25 @@ in day-to-day work.
 
 ### Typescript Language
 
-|                                                               | Includes                                                                  | 
-| ------------------------------------------------------------- | ------------------------------------------------------------------------- | 
-| [Variables](./pages/language/variables.md)\*                  | let, const, scoping                                                       | 
-| [Basic types](./pages/language/basic-types.md)\*              | common types                                                              | 
-| [Type & interface](./pages/language/type-interface.md) \*     | definition, recursive, combining                                          |                      
-| [Destructuring and spread](./pages/language/dest-spread.md)\* | for: tuples, array, objects                                               | 
-| [Function](./pages/language/function.md) \*                   | type definitions for regular, async , curried functions. `this` capturing | 
-| [Modules](./content/modules.md)                               | import, export, default export                                            | 
-| [Callbacks](./pages/language/callbacks.md) \*                 | usage, maintenance complexity                                             | 
+|                                                               | Includes                                                                  |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| [Variables](./pages/language/variables.md)\*                  | let, const, scoping                                                       |
+| [Basic types](./pages/language/basic-types.md)\*              | common types                                                              |
+| [Type & interface](./pages/language/type-interface.md) \*     | definition, recursive, combining                                          |
+| [Destructuring and spread](./pages/language/dest-spread.md)\* | for: tuples, array, objects                                               |
+| [Function](./pages/language/function.md) \*                   | type definitions for regular, async , curried functions. `this` capturing |
+| [Modules](./content/modules.md)                               | import, export, default export                                            |
+| [Callbacks](./pages/language/callbacks.md) \*                 | usage, maintenance complexity                                             |
 | [Promise](./pages/language/promise.md) \*                     | chaining, error handling, parallel processing                             |
 | [async/await](./pages/language/async-await.md) \*             | async definitions, error handling                                         |
-| [Classes](./pages/language/classes.md) \*                     | members definitions                                                       | 
+| [Classes](./pages/language/classes.md) \*                     | members definitions                                                       |
 | [Iterate Array/Object](./pages/language/iterate.md) \*        | for..of, for..in, Object alternatives                                     |
 
 ### Advanced topics
 
-|                                                      | Includes                                  | 
-| ---------------------------------------------------- | ----------------------------------------- 
-| [Generics](./pages/language/generics.md) \*          | function, type, interface                 | 
+|                                                      | Includes                                  |
+| ---------------------------------------------------- | ----------------------------------------- |
+| [Generics](./pages/language/generics.md) \*          | function, type, interface                 |
 | [Utility Types](./pages/language/utility-types.md)\* | Partial, Required, Record, Pick, Omit etc |
 | [Node.js](./content/nodejs-lib.md)                   | Node.js modules and globals               |
 | [TSDocs](./content/tsdocs.md)                        | source code documentation                 |
@@ -42,12 +42,13 @@ in day-to-day work.
 
 ### Practical Concepts
 
-|                                                         | Includes                                                           |
-| ------------------------------------------------------- | ------------------------------------------------------------------ |
-| [Class replacement](./pages/topics/replace-class.md) \* | use builder function instead of `class` definition                 |
-| [Useful libraries](./content/useful-libraries.md)       | walk thru some commonly used libraries                             |
-| [jest](./content/jest.md)                               | writing tests, configuration, mocks, expectations, `jest-dynamodb` |
-| [AWS Lambda](./content/lambda.md)                       | `@types/aws-lambda`, env, caching, DI, aws-sdk faking for tests    |
+|                                                               | Includes                                                           |
+| ------------------------------------------------------------- | ------------------------------------------------------------------ |
+| [Class replacement](./pages/topics/replace-class.md) \*       | use builder function instead of `class` definition                 |
+| [Union type instead of enum](./pages/topics/union-enum.md) \* | explanation when it is better to use union types instead of `enum` |
+| [Useful libraries](./content/useful-libraries.md)             | walk thru some commonly used libraries                             |
+| [jest](./content/jest.md)                                     | writing tests, configuration, mocks, expectations, `jest-dynamodb` |
+| [AWS Lambda](./content/lambda.md)                             | `@types/aws-lambda`, env, caching, DI, aws-sdk faking for tests    |
 
 ### Notes
 

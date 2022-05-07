@@ -29,3 +29,5 @@
 - [topics/errors.md](./topics/errors.md)
 
 - [topics/replace class.md](./topics/replace-class.md)
+
+- [topics/union enum.md](./topics/union-enum.md)
